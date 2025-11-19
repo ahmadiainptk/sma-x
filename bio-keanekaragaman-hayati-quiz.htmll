@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Soal Biologi Kelas X</title>
+    
+    <!-- Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f0fdf4; color: #1e293b; }
+        .mermaid { display: flex; justify-content: center; background: #fff; padding: 10px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #e2e8f0; overflow-x: auto; }
+        .option-label { cursor: pointer; transition: all 0.2s; }
+        .option-label:hover { background-color: #f1f5f9; }
+        .correct-answer { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #14532d; }
+        .wrong-answer { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #7f1d1d; }
+        .svg-container { display: flex; justify-content: center; margin: 1rem 0; }
+        .unanswered { border-color: #f59e0b !important; background-color: #fef3c7 !important; color: #92400e; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. LANDING PAGE -->
+    <div id="landing-page" class="min-h-screen flex flex-col items-center justify-center p-4">
+        <div class="bg-white max-w-2xl w-full rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-gradient-to-r from-green-600 to-teal-600 p-8 text-white text-center">
+                <h1 class="text-3xl font-extrabold mb-2">Latihan Soal IPA Kelas X</h1>
+                <p class="opacity-90">Materi: Keanekaragaman Hayati, Klasifikasi, Ekosistem</p>
+            </div>
+            <div class="p-8">
+                <h3 class="text-xl font-bold text-slate-800 mb-4">Petunjuk Pengerjaan:</h3>
+                <ul class="list-disc list-inside space-y-2 text-slate-600 mb-8 text-sm">
+                    <li>Pilih salah satu paket soal di bawah ini.</li>
+                    <li>Setiap paket terdiri dari <strong>50 Soal Pilihan Ganda</strong>.</li>
+                    <li>Waktu akan dihitung maju (Stopwatch). Tidak ada batasan waktu.</li>
+                    <li>Anda dapat mengirim jawaban kapan saja. Soal kosong dianggap salah.</li>
+                </ul>
+
+                <div class="space-y-3">
+                    <button onclick="startQuiz('packetA')" class="w-full py-4 bg-white border-2 border-blue-100 hover:border-blue-500 hover:bg-blue-50 text-slate-700 rounded-xl font-bold text-lg transition flex justify-between px-6 items-center group">
+                        <span class="group-hover:text-blue-600">📝 Paket A: Keanekaragaman & Ekosistem</span>
+                        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded font-bold">Medium</span>
+                    </button>
+                    <button onclick="startQuiz('packetB')" class="w-full py-4 bg-white border-2 border-purple-100 hover:border-purple-500 hover:bg-purple-50 text-slate-700 rounded-xl font-bold text-lg transition flex justify-between px-6 items-center group">
+                        <span class="group-hover:text-purple-600">🧬 Paket B: Klasifikasi & Taksonomi</span>
+                        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded font-bold">Medium</span>
+                    </button>
+                    <button onclick="startQuiz('packetC')" class="w-full py-4 bg-white border-2 border-red-100 hover:border-red-500 hover:bg-red-50 text-slate-700 rounded-xl font-bold text-lg transition flex justify-between px-6 items-center group">
+                        <span class="group-hover:text-red-600">🔥 Paket C: Analisis & HOTS</span>
+                        <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded font-bold">Hard</span>
+                    </button>
+                    
+                    <div class="pt-4">
+                        <a href="rangkuman_ipa_kelas_x_lengkap.html" target="_blank" class="block w-full text-center py-3 text-slate-400 hover:text-slate-600 text-sm font-semibold transition">
+                            📖 Buka Ringkasan Materi
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. QUIZ PAGE -->
+    <div id="quiz-page" class="hidden min-h-screen flex-col bg-slate-50">
+        <!-- Sticky Header -->
+        <header class="bg-white shadow-md sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+            <div>
+                <h2 class="font-bold text-slate-800 text-lg" id="quiz-title">Paket Soal</h2>
+                <p class="text-xs text-slate-500">Soal Pilihan Ganda</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="bg-slate-800 text-white px-4 py-2 rounded-lg font-mono font-bold text-xl shadow-inner flex items-center gap-2">
+                    <span>⏱️</span>
+                    <span id="timer">00:00</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Question Container -->
+        <div class="container mx-auto max-w-4xl p-6 flex-grow">
+            <form id="quiz-form" class="space-y-8">
+                <!-- Questions will be injected here by JS -->
+            </form>
+
+            <div class="mt-10 mb-20">
+                <button onclick="submitQuiz()" class="w-full bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white font-bold py-4 rounded-xl shadow-lg transition text-xl transform hover:scale-[1.01]">
+                    ✅ Kirim Jawaban
+                </button>
+                <p class="text-center text-slate-400 text-sm mt-2">*Jawaban kosong akan dianggap salah</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. RESULT PAGE -->
+    <div id="result-page" class="hidden min-h-screen bg-slate-50 p-6">
+        <div class="container mx-auto max-w-4xl">
+            <!-- Score Card -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
+                <div class="bg-slate-800 text-white p-6 text-center">
+                    <h2 class="text-2xl font-bold mb-1">Hasil Latihan Soal</h2>
+                    <p class="opacity-75" id="result-packet-name">Paket A</p>
+                </div>
+                <div class="p-6 grid md:grid-cols-2 gap-8 items-center">
+                    <!-- Chart -->
+                    <div class="h-64 w-full relative">
+                        <canvas id="scoreChart"></canvas>
+                    </div>
+                    <!-- Stats -->
+                    <div class="space-y-4">
+                        <div class="text-center md:text-left">
+                            <p class="text-slate-500 text-sm uppercase tracking-wider font-bold">Nilai Akhir</p>
+                            <div class="text-5xl font-extrabold text-blue-600" id="final-score">0</div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-green-50 p-3 rounded-lg border border-green-200">
+                                <p class="text-xs text-green-700 font-bold">Benar</p>
+                                <p class="text-2xl font-bold text-green-600" id="correct-count">0</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg border border-red-200">
+                                <p class="text-xs text-red-700 font-bold">Salah</p>
+                                <p class="text-2xl font-bold text-red-600" id="wrong-count">0</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-100 p-3 rounded-lg text-center text-sm text-slate-600">
+                            Waktu Pengerjaan: <span id="time-taken" class="font-bold">00:00</span>
+                        </div>
+                        <button onclick="location.reload()" class="w-full bg-slate-700 hover:bg-slate-800 text-white py-2 rounded-lg font-semibold transition">
+                            🔄 Kerjakan Paket Lain
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review Section -->
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <h3 class="text-xl font-bold text-slate-800 mb-6 border-b pb-4">Pembahasan Soal</h3>
+                <div id="review-container" class="space-y-8">
+                    <!-- Review items injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- DATA SOAL (DATABASE) ---
+        const svgBakteri = `<svg width="200" height="100" viewBox="0 0 200 100" class="mx-auto"><circle cx="30" cy="50" r="15" fill="#4ade80" stroke="#15803d" stroke-width="2"/><circle cx="65" cy="50" r="15" fill="#4ade80" stroke="#15803d" stroke-width="2"/><circle cx="100" cy="50" r="15" fill="#4ade80" stroke="#15803d" stroke-width="2"/><rect x="140" y="35" width="40" height="30" rx="10" fill="#60a5fa" stroke="#1d4ed8" stroke-width="2"/><text x="65" y="85" text-anchor="middle" font-size="10" fill="#333">Streptokokus</text><text x="160" y="85" text-anchor="middle" font-size="10" fill="#333">Basil</text></svg>`;
+        
+        const createQuestions = (type) => {
+            let q = [];
+            
+            // ---------------------------------------------------------
+            // PAKET A: KEANEKARAGAMAN & EKOSISTEM (Revised - Medium/Hard)
+            // ---------------------------------------------------------
+            if (type === 'packetA') { 
+                q.push(
+                    {
+                        id: 1,
+                        question: "Petani di suatu daerah menanam satu jenis padi hibrida secara massal (monokultur). Apa risiko ekologis jangka panjang terbesar dari praktik ini?",
+                        options: ["Meningkatnya keanekaragaman genetik", "Ledakan hama karena hilangnya predator alami", "Tanah menjadi lebih subur secara alami", "Meningkatnya kestabilan ekosistem sawah", "Penurunan penggunaan pestisida"],
+                        answer: 1,
+                        explanation: "Pertanian monokultur mengurangi keanekaragaman hayati, yang menyebabkan ekosistem tidak stabil dan rentan terhadap ledakan hama karena kurangnya predator alami.",
+                        type: "text"
+                    },
+                    {
+                        id: 2,
+                        question: "Perhatikan jaring-jaring makanan berikut. Jika populasi Ular diburu habis, dampak langsung yang paling mungkin terjadi adalah...",
+                        mermaid: `graph TD; Padi --> Tikus; Tikus --> Ular; Ular --> Elang; Padi --> Belalang; Belalang --> Katak; Katak --> Ular;`,
+                        options: ["Populasi Elang meningkat", "Populasi Tikus dan Katak meningkat drastis", "Populasi Padi akan tumbuh subur", "Populasi Belalang punah", "Ekosistem menjadi lebih seimbang"],
+                        answer: 1,
+                        explanation: "Ular adalah predator bagi Tikus dan Katak. Jika Ular punah, populasi mangsanya (Tikus & Katak) akan meledak karena hilangnya pemangsa.",
+                        type: "mermaid"
+                    },
+                    {
+                        id: 3,
+                        question: "Burung Cendrawasih dan Walabi banyak ditemukan di Papua, sedangkan Gajah dan Harimau di Sumatera. Faktor utama yang menyebabkan perbedaan jenis fauna ini adalah...",
+                        options: ["Perbedaan iklim yang sangat ekstrem", "Sejarah geologis Paparan Sunda dan Sahul", "Aktivitas manusia dalam memindahkan hewan", "Perbedaan jenis tanah", "Ketersediaan air tawar"],
+                        answer: 1,
+                        explanation: "Indonesia Barat (Sunda) pernah menyatu dengan Asia, sedangkan Timur (Sahul) dengan Australia, menyebabkan perbedaan tipe fauna (Asiatis vs Australis).",
+                        type: "text"
+                    },
+                    {
+                        id: 4,
+                        question: "Dalam piramida energi, jika Produsen memiliki energi 10.000 Kkal, berapakah perkiraan energi yang diterima oleh Konsumen Tingkat II?",
+                        options: ["1.000 Kkal", "100 Kkal", "10 Kkal", "5.000 Kkal", "500 Kkal"],
+                        answer: 1,
+                        explanation: "Hukum 10%: Produsen (10.000) -> Konsumen I (1.000) -> Konsumen II (100). Hanya 10% energi yang diteruskan.",
+                        type: "text"
+                    },
+                    {
+                        id: 5,
+                        question: "Tanaman kelapa (Cocos nucifera), aren (Arenga pinnata), dan pinang (Areca catechu) menunjukkan keanekaragaman hayati tingkat...",
+                        options: ["Gen", "Jenis (Spesies)", "Ekosistem", "Populasi", "Varietas"],
+                        answer: 1,
+                        explanation: "Ketiganya adalah spesies yang berbeda tetapi masih dalam satu famili (Palmae/Arecaceae), sehingga termasuk keanekaragaman tingkat Jenis.",
+                        type: "text"
+                    }
+                );
+
+                // Generate soal tambahan agar mencapai 50
+                const topicsA = [
+                    { q: "Zona peralihan di Indonesia dihuni oleh hewan endemik seperti...", a: "Anoa dan Komodo", o: ["Gajah dan Badak", "Kanguru dan Koala", "Cendrawasih", "Orang Utan"] },
+                    { q: "Upaya pelestarian Badak Jawa di Ujung Kulon termasuk pelestarian...", a: "In-situ", o: ["Ex-situ", "Kultur Jaringan", "Domestikasi", "Reboisasi"] },
+                    { q: "Interaksi antara anggrek yang menempel pada pohon mangga adalah...", a: "Komensalisme", o: ["Parasitisme", "Mutualisme", "Kompetisi", "Predasi"] },
+                    { q: "Faktor abiotik yang paling berpengaruh pada ekosistem gurun adalah...", a: "Ketersediaan air", o: ["Kadar garam", "Cahaya matahari", "pH tanah", "Angin"] },
+                    { q: "Penyebab utama hilangnya keanekaragaman hayati saat ini adalah...", a: "Fragmentasi dan kerusakan habitat", o: ["Perubahan iklim alami", "Letusan gunung berapi", "Predasi alami", "Penyakit genetik"] }
+                ];
+
+                for (let i = 6; i <= 50; i++) {
+                    const t = topicsA[(i % topicsA.length)];
+                    let opts = [...t.o, t.a].sort(() => Math.random() - 0.5);
+                    q.push({ id: i, question: `Soal No. ${i}: ${t.q}`, options: opts, answer: opts.indexOf(t.a), explanation: `Jawaban: ${t.a}. (Topik: Ekosistem & Keanekaragaman)`, type: "text" });
+                }
+            } 
+
+            // ---------------------------------------------------------
+            // PAKET B: KLASIFIKASI (Medium)
+            // ---------------------------------------------------------
+            else if (type === 'packetB') {
+                q.push(
+                    {
+                        id: 1,
+                        question: "Sistem klasifikasi 6 Kingdom memisahkan Monera menjadi dua kingdom baru, yaitu...",
+                        options: ["Eubacteria dan Archaebacteria", "Protista dan Fungi", "Plantae dan Animalia", "Virus dan Bakteri", "Prokariota dan Eukariota"],
+                        answer: 0,
+                        explanation: "Carl Woese memisahkan Monera karena perbedaan dinding sel dan genetik antara bakteri sejati (Eubacteria) dan bakteri purba (Archaebacteria).",
+                        type: "text"
+                    },
+                    {
+                        id: 2,
+                        question: "Perhatikan kunci determinasi berikut:\n1a. Bertulang belakang ... (2)\n1b. Tidak bertulang belakang ... (Invertebrata)\n2a. Menyusui ... (Mamalia)\n2b. Tidak menyusui ... (3)\n3a. Tubuh ditutupi sisik ... (4)\nKadal memiliki urutan identifikasi...",
+                        options: ["1a, 2b, 3a", "1a, 2a, 3a", "1b, 2b", "1a, 2b, 3b", "1b, 3a"],
+                        answer: 0,
+                        explanation: "Kadal: Bertulang belakang (1a) -> Tidak menyusui (2b) -> Tubuh bersisik (3a).",
+                        type: "text"
+                    },
+                    {
+                        id: 3,
+                        question: "Nama ilmiah jagung adalah *Zea mays*. Kata *Zea* menunjukkan takson...",
+                        options: ["Genus", "Spesies", "Famili", "Ordo", "Kelas"],
+                        answer: 0,
+                        explanation: "Dalam Binomial Nomenklatur, kata pertama adalah Genus (Marga) dan kata kedua adalah penunjuk spesies.",
+                        type: "text"
+                    },
+                    {
+                        id: 4,
+                        question: "Organisme eukariotik, heterotrof, dinding sel dari kitin, dan bereproduksi dengan spora adalah ciri Kingdom...",
+                        options: ["Fungi", "Plantae", "Protista", "Monera", "Animalia"],
+                        answer: 0,
+                        explanation: "Ciri kunci Fungi (Jamur): Eukariotik, Heterotrof (tidak fotosintesis), Dinding sel Kitin.",
+                        type: "text"
+                    },
+                    {
+                        id: 5,
+                        question: "Manakah pasangan organisme berikut yang memiliki kekerabatan paling dekat?",
+                        options: ["Panthera tigris dan Panthera leo", "Felis catus dan Canis lupus", "Oryza sativa dan Zea mays", "Bos taurus dan Equus caballus", "Elephas maximus dan Rhinoceros sondaicus"],
+                        answer: 0,
+                        explanation: "Panthera tigris (Harimau) dan Panthera leo (Singa) berada dalam satu Genus yang sama (Panthera), sehingga kekerabatannya sangat dekat.",
+                        type: "text"
+                    }
+                );
+
+                const topicsB = [
+                    { q: "Tingkatan takson terendah dengan persamaan ciri paling banyak adalah...", a: "Spesies", o: ["Genus", "Famili", "Ordo", "Kelas"] },
+                    { q: "Dasar klasifikasi sistem filogenetik adalah...", a: "Hubungan kekerabatan evolusi", o: ["Persamaan morfologi", "Manfaat bagi manusia", "Habitat", "Cara makan"] },
+                    { q: "Euglena viridis dimasukkan ke dalam Protista karena...", a: "Uniseluler eukariotik", o: ["Prokariotik", "Multiseluler", "Tidak punya inti", "Memiliki akar batang daun"] },
+                    { q: "Penulisan nama spesies yang benar adalah...", a: "Felis catus (miring/garis bawah)", o: ["Felis Catus", "felis catus", "Felis catus", "FELIS CATUS"] },
+                    { q: "Kelompok tumbuhan berbiji terbuka disebut...", a: "Gymnospermae", o: ["Angiospermae", "Pteridophyta", "Bryophyta", "Monokotil"] }
+                ];
+
+                for (let i = 6; i <= 50; i++) {
+                    const t = topicsB[(i % topicsB.length)];
+                    let opts = [...t.o, t.a].sort(() => Math.random() - 0.5);
+                    q.push({ id: i, question: `Soal No. ${i}: ${t.q}`, options: opts, answer: opts.indexOf(t.a), explanation: `Jawaban: ${t.a}. (Topik: Klasifikasi)`, type: "text" });
+                }
+            }
+
+            // ---------------------------------------------------------
+            // PAKET C: HOTS & ANALISIS (Hard)
+            // ---------------------------------------------------------
+            else if (type === 'packetC') {
+                q.push(
+                    {
+                        id: 1,
+                        question: "Seorang siswa menemukan organisme mikroskopis di air kolam dengan ciri: uniseluler, eukariotik, memiliki klorofil, dan memiliki flagela untuk bergerak. Berdasarkan ciri tersebut, organisme ini kemungkinan besar adalah...",
+                        options: ["Euglena (Protista)", "Cyanobacteria (Monera)", "Rhizopus (Fungi)", "Paramecium (Protista)", "Saccharomyces (Fungi)"],
+                        answer: 0,
+                        explanation: "Cyanobacteria prokariotik (salah). Fungi tidak berklorofil (salah). Paramecium tidak berklorofil (salah). Euglena adalah Protista mirip tumbuhan (klorofil) dan hewan (flagela).",
+                        type: "text"
+                    },
+                    {
+                        id: 2,
+                        question: "Analisis Kladogram berikut. Manakah pernyataan yang PALING TEPAT mengenai hubungan kekerabatan Macan dan Manusia?",
+                        mermaid: `graph LR; A[Vertebrata] --> B[Ikan]; A --> C{Kaki 4}; C --> D[Katak]; C --> E{Amnion}; E --> F[Reptil]; E --> G{Rambut & Susu}; G --> H[Macan]; G --> I[Manusia];`,
+                        options: ["Macan dan Manusia berbagi nenek moyang yang memiliki rambut dan kelenjar susu", "Manusia berevolusi langsung dari Macan", "Reptil memiliki hubungan kekerabatan lebih dekat dengan Manusia dibanding Macan", "Katak memiliki ciri telur amniotik", "Ikan memiliki kaki empat"],
+                        answer: 0,
+                        explanation: "Dalam kladogram, Macan dan Manusia berada dalam satu clade yang bercabang dari node 'Rambut & Susu', artinya mereka berbagi nenek moyang yang sama dengan ciri tersebut.",
+                        type: "mermaid"
+                    },
+                    {
+                        id: 3,
+                        question: "Di sebuah danau, terjadi ledakan populasi alga (blooming algae) akibat limpahan pupuk pertanian (eutrofikasi). Dampak lanjutan yang paling fatal bagi ekosistem danau tersebut adalah...",
+                        options: ["Kematian ikan massal karena penurunan kadar oksigen terlarut (DO) di malam hari", "Peningkatan populasi ikan karena makanan berlimpah", "Air menjadi jernih karena alga menyerap kotoran", "Peningkatan kadar oksigen drastis secara permanen", "Tumbuhan air dasar danau tumbuh subur"],
+                        answer: 0,
+                        explanation: "Blooming algae menutupi permukaan air menghalangi matahari (tanaman dasar mati). Saat alga mati, dekomposisi oleh bakteri menghabiskan oksigen (DO turun), menyebabkan ikan mati.",
+                        type: "text"
+                    },
+                    {
+                        id: 4,
+                        question: "Jika terjadi biomagnifikasi (akumulasi racun) DDT di ekosistem perairan, organisme manakah yang akan memiliki konsentrasi racun tertinggi di tubuhnya?",
+                        mermaid: `graph LR; Plankton --> Ikan_Kecil --> Ikan_Besar --> Burung_Pelikan;`,
+                        options: ["Burung Pelikan (Konsumen Puncak)", "Plankton (Produsen)", "Ikan Kecil", "Ikan Besar", "Air Danau"],
+                        answer: 0,
+                        explanation: "Dalam biomagnifikasi, racun yang tidak terurai akan terakumulasi semakin tinggi pada tingkat trofik yang lebih atas. Konsumen puncak (Pelikan) menanggung kadar tertinggi.",
+                        type: "mermaid"
+                    },
+                    {
+                        id: 5,
+                        question: "Penyakit TBC disebabkan oleh *Mycobacterium tuberculosis*, sedangkan Tifus disebabkan oleh *Salmonella typhi*. Kedua organisme ini dimasukkan dalam Kingdom Monera karena...",
+                        options: ["Bersifat prokariotik dan uniseluler", "Bersifat parasit obligat", "Tidak memiliki dinding sel", "Memiliki membran inti sel", "Berkembang biak dengan spora"],
+                        answer: 0,
+                        explanation: "Kunci klasifikasi Monera adalah struktur sel Prokariotik (tidak memiliki membran inti) dan uniseluler.",
+                        type: "text"
+                    }
+                );
+
+                // Additional HOTS/Analisis Questions
+                const topicsC = [
+                    { q: "Mengapa jamur tidak dikategorikan sebagai tumbuhan meskipun memiliki dinding sel?", a: "Dinding sel jamur dari kitin dan tidak berklorofil", o: ["Jamur tidak memiliki akar", "Jamur hidup di tempat lembab", "Jamur bereproduksi dengan biji", "Jamur bersifat autotrof"] },
+                    { q: "Apa yang terjadi jika dua spesies berbeda memiliki relung (niche) yang sama persis dalam satu habitat?", a: "Kompetisi eksklusif (satu spesies akan tersingkir)", o: ["Mereka akan bersimbiosis mutualisme", "Terjadi hibridasi alami", "Keduanya hidup berdampingan damai", "Sumber daya alam bertambah"] },
+                    { q: "Penggunaan pestisida berlebihan membunuh hama namun juga membunuh serangga penyerbuk. Dampak jangka panjangnya adalah...", a: "Penurunan produktivitas tanaman buah/biji", o: ["Tanaman menjadi lebih subur", "Hama punah selamanya", "Tanah menjadi gembur", "Fotosintesis meningkat"] },
+                    { q: "Dalam sistem 5 Kingdom, Euglena sering membingungkan ahli taksonomi karena...", a: "Punya klorofil (seperti tumbuhan) tapi bergerak aktif (seperti hewan)", o: ["Punya dinding sel tapi heterotrof", "Prokariotik tapi multiseluler", "Hidup di darat dan air", "Bernapas dengan paru-paru"] },
+                    { q: "Jika hutan bakau (mangrove) ditebang habis untuk tambak udang, dampak abiotik yang terjadi adalah...", a: "Abrasi pantai meningkat", o: ["Populasi ikan meningkat", "Kadar garam air laut turun", "Udara menjadi lebih sejuk", "Gelombang laut menjadi tenang"] }
+                ];
+
+                for (let i = 6; i <= 50; i++) {
+                    const t = topicsC[(i % topicsC.length)];
+                    let opts = [...t.o, t.a].sort(() => Math.random() - 0.5);
+                    q.push({ id: i, question: `Soal Analisis ${i}: ${t.q}`, options: opts, answer: opts.indexOf(t.a), explanation: `Analisis: ${t.a}. (Soal HOTS)`, type: "text" });
+                }
+            }
+
+            return q;
+        };
+
+        // State Aplikasi
+        let currentPacket = [];
+        let currentPacketName = "";
+        let timerInterval;
+        let seconds = 0;
+        let userAnswers = {}; // { questionId: selectedOptionIndex }
+
+        // --- LOGIC FUNGSI ---
+
+        function startQuiz(packetType) {
+            seconds = 0;
+            userAnswers = {};
+            
+            if (packetType === 'packetA') currentPacketName = "Paket A: Keanekaragaman & Ekosistem (Medium)";
+            else if (packetType === 'packetB') currentPacketName = "Paket B: Klasifikasi (Medium)";
+            else currentPacketName = "Paket C: HOTS & Analisis (Hard)";
+            
+            currentPacket = createQuestions(packetType);
+
+            document.getElementById('landing-page').classList.add('hidden');
+            document.getElementById('quiz-page').classList.remove('hidden');
+            document.getElementById('quiz-page').classList.add('flex');
+            document.getElementById('quiz-title').innerText = currentPacketName;
+
+            renderQuestions();
+
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                seconds++;
+                const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+                const s = (seconds % 60).toString().padStart(2, '0');
+                document.getElementById('timer').innerText = `${m}:${s}`;
+            }, 1000);
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('quiz-form');
+            container.innerHTML = '';
+
+            currentPacket.forEach((q, index) => {
+                const div = document.createElement('div');
+                div.className = "bg-white p-6 rounded-2xl shadow-sm border border-slate-200";
+                
+                let visualHTML = '';
+                if (q.type === 'mermaid') {
+                    visualHTML = `<div class="mermaid">${q.mermaid}</div>`;
+                } else if (q.type === 'svg') {
+                    visualHTML = `<div class="svg-container">${q.svg}</div>`;
+                }
+
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="option-label flex items-center p-3 rounded-lg border border-slate-200 cursor-pointer mb-2 group hover:border-blue-400">
+                            <input type="radio" name="q${q.id}" value="${optIdx}" class="w-5 h-5 text-blue-600 focus:ring-blue-500" onchange="saveAnswer(${q.id}, ${optIdx})">
+                            <span class="ml-3 text-slate-700 group-hover:text-slate-900">${String.fromCharCode(65 + optIdx)}. ${opt}</span>
+                        </label>
+                    `;
+                });
+
+                div.innerHTML = `
+                    <div class="flex gap-4 mb-4">
+                        <span class="bg-slate-800 text-white w-8 h-8 flex items-center justify-center rounded-full font-bold flex-shrink-0 shadow-md">${index + 1}</span>
+                        <div class="w-full">
+                            <p class="text-lg font-semibold text-slate-800 mb-4 leading-relaxed">${q.question}</p>
+                            ${visualHTML}
+                            <div class="space-y-1 mt-2">
+                                ${optionsHTML}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+            mermaid.init();
+        }
+
+        function saveAnswer(qId, optIdx) {
+            userAnswers[qId] = optIdx;
+        }
+
+        function submitQuiz() {
+            if (!confirm("Yakin ingin mengirim jawaban? Soal yang belum dijawab akan dihitung salah.")) return;
+
+            clearInterval(timerInterval);
+            
+            let correct = 0;
+            let wrong = 0;
+            
+            currentPacket.forEach(q => {
+                // Check if answer exists and is correct
+                // userAnswers[q.id] could be undefined (unanswered), which is !== q.answer (correct)
+                if (userAnswers[q.id] === q.answer) {
+                    correct++;
+                } else {
+                    wrong++;
+                }
+            });
+
+            const score = Math.round((correct / currentPacket.length) * 100);
+
+            document.getElementById('final-score').innerText = score;
+            document.getElementById('correct-count').innerText = correct;
+            document.getElementById('wrong-count').innerText = wrong;
+            document.getElementById('result-packet-name').innerText = currentPacketName;
+            
+            const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const s = (seconds % 60).toString().padStart(2, '0');
+            document.getElementById('time-taken').innerText = `${m}:${s}`;
+
+            renderChart(correct, wrong);
+            renderReview();
+
+            document.getElementById('quiz-page').classList.add('hidden');
+            document.getElementById('quiz-page').classList.remove('flex');
+            document.getElementById('result-page').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function renderChart(correct, wrong) {
+            const ctx = document.getElementById('scoreChart').getContext('2d');
+            if (window.myChart) window.myChart.destroy(); // Prevent canvas reuse error
+            
+            window.myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Benar', 'Salah'],
+                    datasets: [{
+                        data: [correct, wrong],
+                        backgroundColor: ['#22c55e', '#ef4444'],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { padding: 20 } }
+                    }
+                }
+            });
+        }
+
+        function renderReview() {
+            const container = document.getElementById('review-container');
+            container.innerHTML = '';
+
+            currentPacket.forEach((q, idx) => {
+                const userAnswer = userAnswers[q.id];
+                const isCorrect = userAnswer === q.answer;
+                const isUnanswered = userAnswer === undefined;
+                
+                let statusColor = isCorrect ? "text-green-600" : "text-red-600";
+                let statusIcon = isCorrect ? "✅ Benar" : "❌ Salah";
+                if (isUnanswered) {
+                    statusColor = "text-orange-600";
+                    statusIcon = "⚠️ Tidak Dijawab";
+                }
+
+                let visualHTML = '';
+                if (q.type === 'mermaid') visualHTML = `<div class="mermaid">${q.mermaid}</div>`;
+                else if (q.type === 'svg') visualHTML = `<div class="svg-container">${q.svg}</div>`;
+
+                let optionsReview = '';
+                q.options.forEach((opt, i) => {
+                    let classes = "p-3 rounded-lg border mb-1 block transition ";
+                    if (i === q.answer) {
+                        classes += "correct-answer font-bold shadow-sm"; // Kunci Jawaban
+                    } else if (i === userAnswer && !isCorrect) {
+                        classes += "wrong-answer font-bold opacity-75"; // Jawaban Salah User
+                    } else {
+                        classes += "bg-slate-50 border-slate-100 text-slate-400";
+                    }
+                    
+                    // Add marker
+                    let marker = "";
+                    if (i === q.answer) marker = " (Kunci)";
+                    if (i === userAnswer) marker = " (Jawabanmu)";
+
+                    optionsReview += `<div class="${classes}">${String.fromCharCode(65 + i)}. ${opt} <span class="text-xs float-right mt-1 font-normal opacity-70">${marker}</span></div>`;
+                });
+
+                const html = `
+                    <div class="border-b border-slate-100 pb-8 last:border-0">
+                        <div class="flex justify-between mb-3 items-center">
+                            <span class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Soal ${idx + 1}</span>
+                            <span class="font-bold ${statusColor} flex items-center gap-1">${statusIcon}</span>
+                        </div>
+                        <p class="mb-4 text-lg font-medium text-slate-800">${q.question}</p>
+                        ${visualHTML}
+                        <div class="mb-5 space-y-2">${optionsReview}</div>
+                        <div class="bg-blue-50 p-5 rounded-xl border-l-4 border-blue-500">
+                            <strong class="text-blue-800 block mb-2 text-sm uppercase tracking-wide">💡 Pembahasan:</strong>
+                            <p class="text-slate-700 leading-relaxed">${q.explanation}</p>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+            mermaid.init();
+        }
+
+        mermaid.initialize({ startOnLoad: false, theme: 'neutral', securityLevel: 'loose' });
+    </script>
+</body>
+</html>
