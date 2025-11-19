@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rangkuman IPA Biologi Kelas X</title>
+    
+    <!-- Tailwind CSS untuk styling cepat dan responsif -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Mermaid.js untuk Diagram -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    
+    <!-- Chart.js untuk Grafik -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f9ff;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            border-left: 5px solid #0ea5e9;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        /* Styling khusus untuk Canvas Chartjs agar responsif */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Navbar -->
+    <nav class="bg-sky-600 text-white p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Rangkuman IPA Kelas X</h1>
+            <div class="hidden md:flex space-x-4 text-sm font-semibold">
+                <a href="#keanekaragaman" class="hover:text-sky-200">Keanekaragaman Hayati</a>
+                <a href="#klasifikasi" class="hover:text-sky-200">Klasifikasi</a>
+                <a href="#ekosistem" class="hover:text-sky-200">Ekosistem</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-6 max-w-5xl">
+        
+        <!-- Intro Header -->
+        <header class="mb-10 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-2">Modul Pembelajaran Biologi</h2>
+            <p class="text-slate-600">Rangkuman materi berdasarkan KD 3.3 (Klasifikasi) dan Bab VI (Keanekaragaman & Ekosistem).</p>
+        </header>
+
+        <!-- BAB 1: KEANEKARAGAMAN HAYATI -->
+        <section id="keanekaragaman" class="mb-16">
+            <div class="flex items-center mb-6">
+                <!-- SVG Icon -->
+                <svg class="w-10 h-10 text-sky-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 class="text-2xl font-bold text-slate-800 section-title m-0">1. Keanekaragaman Hayati</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card p-6">
+                    <h4 class="font-bold text-lg mb-2 text-sky-600">Tingkatan Keanekaragaman</h4>
+                    <ul class="list-disc list-inside space-y-2 text-sm">
+                        <li><strong>Tingkat Gen:</strong> Variasi dalam satu spesies. <br><em class="text-slate-500">Contoh: Pisang raja, pisang ambon, pisang tanduk.</em></li>
+                        <li><strong>Tingkat Jenis (Spesies):</strong> Variasi antar spesies dalam satu famili/genus. <br><em class="text-slate-500">Contoh: Kucing, Harimau, Singa (Famili Felidae).</em></li>
+                        <li><strong>Tingkat Ekosistem:</strong> Hubungan timbal balik biotik & abiotik. <br><em class="text-slate-500">Contoh: Hutan hujan tropis, Gurun, Ekosistem laut.</em></li>
+                    </ul>
+                </div>
+
+                <div class="card p-6">
+                    <h4 class="font-bold text-lg mb-2 text-sky-600">Persebaran Fauna Indonesia</h4>
+                    <div class="mermaid">
+                        graph LR
+                        A[Indonesia] --> B[Barat/Asiatis]
+                        A --> C[Tengah/Peralihan]
+                        A --> D[Timur/Australis]
+                        B --> B1[Gajah, Badak, Orang Utan]
+                        C --> C1[Komodo, Anoa, Maleo]
+                        D --> D1[Cendrawasih, Kanguru Pohon]
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 card p-6 bg-yellow-50 border border-yellow-200">
+                <h4 class="font-bold text-yellow-800 mb-2">Manfaat & Pelestarian</h4>
+                <p class="text-sm mb-2">Keanekaragaman hayati bermanfaat sebagai sumber pangan, obat-obatan, kosmetik, dan plasma nutfah.</p>
+                <div class="flex gap-4 text-sm font-semibold">
+                    <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full">In-situ: Pelestarian di habitat asli (Cagar Alam)</span>
+                    <span class="bg-purple-200 text-purple-800 px-3 py-1 rounded-full">Ex-situ: Pelestarian di luar habitat (Kebun Binatang)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAB 2: KLASIFIKASI MAKHLUK HIDUP -->
+        <section id="klasifikasi" class="mb-16">
+            <div class="flex items-center mb-6">
+                <!-- SVG Icon -->
+                <svg class="w-10 h-10 text-sky-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+                <h3 class="text-2xl font-bold text-slate-800 section-title m-0">2. Klasifikasi Makhluk Hidup</h3>
+            </div>
+
+            <!-- Prinsip Klasifikasi -->
+            <div class="card p-6 mb-6">
+                <h4 class="font-bold text-lg mb-4 text-sky-600 text-center">Hierarki Takson (Urutan Taksonomi)</h4>
+                <p class="text-center text-sm text-slate-500 mb-4">Urutan dari tingkat tertinggi (umum) ke terendah (spesifik)</p>
+                <div class="mermaid">
+                    graph TD
+                    K[Kingdom] --> D[Filum / Divisi]
+                    D --> C[Class / Kelas]
+                    C --> O[Ordo / Bangsa]
+                    O --> F[Famili / Suku]
+                    F --> G[Genus / Marga]
+                    G --> S[Spesies / Jenis]
+                    style K fill:#e0f2fe,stroke:#0ea5e9,stroke-width:2px
+                    style S fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="card p-6">
+                    <h4 class="font-bold text-lg mb-2 text-sky-600">Sistem 5 Kingdom (Whittaker)</h4>
+                    <ul class="list-decimal list-inside text-sm space-y-2">
+                        <li><strong>Monera:</strong> Prokariotik (tidak ada membran inti). Contoh: Bakteri.</li>
+                        <li><strong>Protista:</strong> Eukariotik sederhana. Contoh: Amoeba, Alga.</li>
+                        <li><strong>Fungi:</strong> Eukariotik, heterotrof, dinding sel kitin. Contoh: Jamur.</li>
+                        <li><strong>Plantae:</strong> Eukariotik, autotrof (fotosintesis). Contoh: Lumut, Paku, Tumbuhan Biji.</li>
+                        <li><strong>Animalia:</strong> Eukariotik, heterotrof, motil (bergerak). Contoh: Hewan.</li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h4 class="font-bold text-lg mb-2 text-sky-600">Binomial Nomenklatur</h4>
+                    <p class="text-sm mb-3">Aturan penamaan ilmiah oleh Carolus Linnaeus:</p>
+                    <div class="bg-slate-100 p-4 rounded border border-slate-300 font-mono text-center">
+                        <span class="text-red-500 font-bold">Oryza</span> <span class="text-blue-500 italic">sativa</span>
+                    </div>
+                    <ul class="mt-3 text-xs text-slate-600 space-y-1">
+                        <li>1. Terdiri dari 2 kata Latin.</li>
+                        <li>2. Kata pertama (Genus) diawali huruf besar.</li>
+                        <li>3. Kata kedua (Spesies) huruf kecil semua.</li>
+                        <li>4. Dicetak miring atau digarisbawahi.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Kladogram -->
+            <div class="card p-6">
+                <h4 class="font-bold text-lg mb-2 text-sky-600">Kladogram (Pohon Evolusi)</h4>
+                <p class="text-sm mb-4">Diagram cabang yang menggambarkan hubungan kekerabatan antar makhluk hidup berdasarkan ciri-ciri yang dimiliki.</p>
+                <div class="mermaid">
+                    graph LR
+                    A[Nenek Moyang] --> B{Tulang Belakang?}
+                    B -- Tidak --> C[Lancelet]
+                    B -- Ya --> D{Rahang Berengsel?}
+                    D -- Tidak --> E[Lamprey]
+                    D -- Ya --> F{Empat Kaki?}
+                    F -- Tidak --> G[Ikan Tuna]
+                    F -- Ya --> H{Telur Amniotik?}
+                    H -- Tidak --> I[Salamander]
+                    H -- Ya --> J[Kura-kura/Macan]
+                </div>
+            </div>
+        </section>
+
+        <!-- BAB 3: EKOSISTEM & INTERAKSI -->
+        <section id="ekosistem" class="mb-16">
+            <div class="flex items-center mb-6">
+                <!-- SVG Icon -->
+                <svg class="w-10 h-10 text-sky-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 class="text-2xl font-bold text-slate-800 section-title m-0">3. Ekosistem & Interaksi</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="card p-6">
+                    <h4 class="font-bold text-lg mb-2 text-sky-600">Komponen Ekosistem</h4>
+                    <ul class="list-disc list-inside text-sm space-y-2">
+                        <li><strong>Biotik:</strong> Makhluk hidup (Produsen, Konsumen, Dekomposer).</li>
+                        <li><strong>Abiotik:</strong> Benda tak hidup (Cahaya, Air, Tanah, Suhu).</li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h4 class="font-bold text-lg mb-2 text-sky-600">Pola Interaksi</h4>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li><strong>Predasi:</strong> Makan dan dimakan (Predator vs Mangsa).</li>
+                        <li><strong>Kompetisi:</strong> Persaingan sumber daya.</li>
+                        <li><strong>Simbiosis Mutualisme:</strong> Saling untung.</li>
+                        <li><strong>Simbiosis Parasitisme:</strong> Satu untung, satu rugi.</li>
+                        <li><strong>Simbiosis Komensalisme:</strong> Satu untung, satu netral.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Grafik Piramida Energi -->
+            <div class="card p-6">
+                <h4 class="font-bold text-lg mb-4 text-sky-600 text-center">Piramida Energi (Aliran Energi)</h4>
+                <p class="text-center text-xs text-slate-500 mb-2">Hanya sekitar 10% energi yang diteruskan ke tingkat trofik selanjutnya.</p>
+                <div class="chart-container mx-auto">
+                    <canvas id="energyChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Tombol Latihan -->
+        <div class="bg-sky-700 text-white rounded-xl p-8 text-center shadow-lg">
+            <h3 class="text-2xl font-bold mb-2">Siap untuk Latihan Soal?</h3>
+            <p class="mb-6 text-sky-100">Setelah mempelajari rangkuman di atas, mari kita uji pemahamanmu dengan soal-soal setara kelas X SMA.</p>
+            <button onclick="alert('Fitur Latihan Soal akan dibuat pada langkah berikutnya!')" class="bg-white text-sky-700 font-bold py-3 px-8 rounded-full hover:bg-sky-100 transition shadow-md">
+                Mulai Latihan Soal
+            </button>
+        </div>
+
+        <footer class="text-center text-slate-400 text-sm mt-12">
+            <p>&copy; 2024 Materi IPA SMA Kelas X - Dibuat berdasarkan Modul Kemdikbud.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Inisialisasi Mermaid diagram
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+
+        // Inisialisasi Chart.js untuk Piramida Energi
+        const ctx = document.getElementById('energyChart').getContext('2d');
+        const energyChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Produsen (Tumbuhan)', 'Konsumen I (Herbivora)', 'Konsumen II (Karnivora)', 'Konsumen III (Top Predator)'],
+                datasets: [{
+                    label: 'Energi (Kkal)',
+                    data: [10000, 1000, 100, 10],
+                    backgroundColor: [
+                        'rgba(34, 197, 94, 0.7)',  // Green
+                        'rgba(234, 179, 8, 0.7)',  // Yellow
+                        'rgba(249, 115, 22, 0.7)', // Orange
+                        'rgba(239, 68, 68, 0.7)'   // Red
+                    ],
+                    borderColor: [
+                        'rgba(34, 197, 94, 1)',
+                        'rgba(234, 179, 8, 1)',
+                        'rgba(249, 115, 22, 1)',
+                        'rgba(239, 68, 68, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y', // Membuat grafik horizontal seperti piramida samping
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Jumlah Energi Tersedia'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw + ' Kkal';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
