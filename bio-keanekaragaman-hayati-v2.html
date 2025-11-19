@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rangkuman Lengkap Biologi Kelas X</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        .gradient-header { background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%); }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .mermaid { display: flex; justify-content: center; margin: 1rem 0; }
+        .sub-heading { color: #0369a1; font-weight: 700; border-bottom: 2px solid #bae6fd; padding-bottom: 0.25rem; margin-bottom: 0.75rem; display: inline-block; }
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <!-- Header -->
+    <header class="gradient-header text-white py-10 px-4 mb-8 shadow-lg">
+        <div class="container mx-auto max-w-5xl text-center">
+            <h1 class="text-4xl font-extrabold mb-3">Rangkuman Materi Biologi Kelas X</h1>
+            <p class="text-blue-100 text-lg">Keanekaragaman Hayati, Klasifikasi Makhluk Hidup, dan Ekosistem</p>
+            <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm font-semibold">
+                <a href="#bab1" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-full transition backdrop-blur-sm">Bab 1: Keanekaragaman</a>
+                <a href="#bab2" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-full transition backdrop-blur-sm">Bab 2: Klasifikasi</a>
+                <a href="#bab3" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-full transition backdrop-blur-sm">Bab 3: Ekosistem</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto max-w-5xl px-4 pb-12 space-y-16">
+
+        <!-- BAB 1: KEANEKARAGAMAN HAYATI -->
+        <section id="bab1">
+            <div class="flex items-center mb-6 border-b-4 border-blue-500 pb-2">
+                <span class="text-4xl mr-3">🌿</span>
+                <h2 class="text-3xl font-bold text-slate-800">1. Keanekaragaman Hayati</h2>
+            </div>
+
+            <!-- Tingkatan Keanekaragaman -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-6 card-hover transition duration-300">
+                <h3 class="sub-heading text-xl">A. Tingkatan Keanekaragaman Hayati</h3>
+                <div class="grid md:grid-cols-3 gap-6 mt-4">
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
+                        <h4 class="font-bold text-blue-800 mb-2">1. Tingkat Gen</h4>
+                        <p class="text-sm">Variasi susunan gen dalam <strong>satu spesies</strong>. Menyebabkan variasi antar individu (varietas).</p>
+                        <p class="text-xs text-slate-500 mt-2 italic">Contoh: Variasi Pisang (Pisang Raja, Ambon, Tanduk) atau variasi warna bunga mawar.</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-400">
+                        <h4 class="font-bold text-green-800 mb-2">2. Tingkat Jenis (Spesies)</h4>
+                        <p class="text-sm">Variasi antar spesies yang berbeda namun masih dalam satu famili atau genus.</p>
+                        <p class="text-xs text-slate-500 mt-2 italic">Contoh: Famili Felidae (Kucing, Harimau, Singa) atau Genus Citrus (Jeruk Bali, Nipis, Lemon).</p>
+                    </div>
+                    <div class="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400">
+                        <h4 class="font-bold text-orange-800 mb-2">3. Tingkat Ekosistem</h4>
+                        <p class="text-sm">Interaksi unik antara makhluk hidup dengan lingkungan abiotik yang berbeda-beda.</p>
+                        <p class="text-xs text-slate-500 mt-2 italic">Contoh: Ekosistem Hutan Hujan Tropis, Sabana, Hutan Bakau (Mangrove).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biogeografi Indonesia -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-6 card-hover transition duration-300">
+                <h3 class="sub-heading text-xl">B. Persebaran Fauna di Indonesia</h3>
+                <p class="mb-4 text-sm">Dipisahkan oleh <strong>Garis Wallace</strong> (Barat-Tengah) dan <strong>Garis Weber</strong> (Tengah-Timur).</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-100 text-slate-700 uppercase font-bold">
+                            <tr>
+                                <th class="px-4 py-3 rounded-tl-lg">Wilayah</th>
+                                <th class="px-4 py-3">Tipe & Ciri-ciri</th>
+                                <th class="px-4 py-3 rounded-tr-lg">Contoh Hewan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr>
+                                <td class="px-4 py-3 font-semibold">Barat (Sumatra, Jawa, Kalimantan)</td>
+                                <td class="px-4 py-3 text-slate-600"><strong>Asiatis:</strong> Mamalia besar, kera, ikan air tawar beragam, burung berkicau (warna kurang mencolok).</td>
+                                <td class="px-4 py-3 italic">Gajah, Badak Jawa (bercula satu), Orang Utan, Harimau.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-semibold">Tengah (Sulawesi, Nusa Tenggara)</td>
+                                <td class="px-4 py-3 text-slate-600"><strong>Peralihan (Endemik):</strong> Hewan khas Indonesia yang tidak mirip Asia maupun Australia.</td>
+                                <td class="px-4 py-3 italic">Komodo, Anoa (kerbau kerdil), Burung Maleo, Babi Rusa.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-semibold">Timur (Papua, Maluku)</td>
+                                <td class="px-4 py-3 text-slate-600"><strong>Australis:</strong> Mamalia kecil/berkantung, burung warna-warni, sedikit ikan air tawar.</td>
+                                <td class="px-4 py-3 italic">Cendrawasih, Walabi, Kanguru Pohon, Kuskus.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+             <!-- Manfaat & Pelestarian -->
+             <div class="bg-white rounded-xl shadow-md p-6 card-hover transition duration-300">
+                <h3 class="sub-heading text-xl">C. Manfaat & Pelestarian</h3>
+                <div class="grid md:grid-cols-2 gap-8 mt-2">
+                    <div>
+                        <h4 class="font-bold text-slate-700 mb-2">Manfaat Utama</h4>
+                        <ul class="list-disc list-inside text-sm space-y-1 text-slate-600">
+                            <li><strong>Pangan:</strong> Sumber karbohidrat, protein, vitamin.</li>
+                            <li><strong>Obat-obatan:</strong> Kunyit (kurkumin), Kina (malaria), Buah Merah (antioksidan).</li>
+                            <li><strong>Papan & Sandang:</strong> Kayu Jati, Ulin (bangunan), Kapas, Sutra.</li>
+                            <li><strong>Plasma Nutfah:</strong> Sumber gen untuk varietas unggul.</li>
+                            <li><strong>Ekologi:</strong> Paru-paru dunia, penjaga kestabilan iklim.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-700 mb-2">Metode Pelestarian</h4>
+                        <ul class="list-none space-y-2 text-sm">
+                            <li class="bg-green-50 px-3 py-2 rounded border-l-4 border-green-500">
+                                <strong>In-situ (Di habitat asli):</strong><br>
+                                Taman Nasional (Komodo, Ujung Kulon), Cagar Alam, Suaka Margasatwa.
+                            </li>
+                            <li class="bg-purple-50 px-3 py-2 rounded border-l-4 border-purple-500">
+                                <strong>Ex-situ (Di luar habitat):</strong><br>
+                                Kebun Binatang, Kebun Raya (Bogor), Taman Safari.
+                            </li>
+                            <li class="bg-blue-50 px-3 py-2 rounded border-l-4 border-blue-500">
+                                <strong>Bioteknologi Modern:</strong><br>
+                                <em>Kultur Jaringan</em> (perbanyakan tanaman langka), <em>Kloning</em> (hewan).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAB 2: KLASIFIKASI MAKHLUK HIDUP -->
+        <section id="bab2">
+            <div class="flex items-center mb-6 border-b-4 border-blue-500 pb-2">
+                <span class="text-4xl mr-3">🧬</span>
+                <h2 class="text-3xl font-bold text-slate-800">2. Klasifikasi Makhluk Hidup</h2>
+            </div>
+
+            <!-- Prinsip & Sistem -->
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="sub-heading text-lg">A. Macam Sistem Klasifikasi</h3>
+                    <ul class="space-y-3 text-sm mt-2">
+                        <li>
+                            <strong class="text-indigo-600">1. Sistem Alami:</strong> Berdasarkan morfologi (bentuk luar) alami.
+                            <br><span class="text-xs text-slate-500">Tokoh: Michael Adams, Jean Baptiste de Lamarck.</span>
+                        </li>
+                        <li>
+                            <strong class="text-indigo-600">2. Sistem Buatan (Artifisial):</strong> Berdasarkan manfaat atau ciri yang dipilih manusia (misal: tanaman obat, tanaman hias).
+                            <br><span class="text-xs text-slate-500">Tokoh: Aristoteles, Carolus Linnaeus.</span>
+                        </li>
+                        <li>
+                            <strong class="text-indigo-600">3. Sistem Filogenetik:</strong> Berdasarkan hubungan kekerabatan evolusioner (genetik & biokimia).
+                            <br><span class="text-xs text-slate-500">Tokoh: Charles Darwin.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="sub-heading text-lg">B. Perkembangan Kingdom</h3>
+                    <div class="mermaid">
+                        timeline
+                            title Sejarah Klasifikasi
+                            2 Kingdom : Plantae, Animalia (Linnaeus)
+                            3 Kingdom : + Protista (Haeckel)
+                            4 Kingdom : + Monera (Copeland)
+                            5 Kingdom : + Fungi (Whittaker)
+                            6 Kingdom : Monera pecah jadi Eubacteria & Archaebacteria (Woese)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detail 5 Kingdom -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-6 card-hover">
+                <h3 class="sub-heading text-xl">C. Karakteristik 5 Kingdom (Whittaker)</h3>
+                <div class="overflow-x-auto mt-4">
+                    <table class="w-full text-sm text-left border-collapse">
+                        <thead class="bg-slate-800 text-white">
+                            <tr>
+                                <th class="p-3 rounded-tl-lg">Kingdom</th>
+                                <th class="p-3">Tipe Sel</th>
+                                <th class="p-3">Nutrisi</th>
+                                <th class="p-3">Ciri Khas</th>
+                                <th class="p-3 rounded-tr-lg">Contoh</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-slate-700">Monera</td>
+                                <td class="p-3">Prokariotik (Tanpa membran inti)</td>
+                                <td class="p-3">Auto/Heterotrof</td>
+                                <td class="p-3">Uniseluler, dinding sel peptidoglikan (bakteri).</td>
+                                <td class="p-3 italic">E. coli, Lactobacillus, Cyanobacteria.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-slate-700">Protista</td>
+                                <td class="p-3">Eukariotik</td>
+                                <td class="p-3">Auto/Heterotrof</td>
+                                <td class="p-3">Sederhana, mirip hewan/tumbuhan/jamur.</td>
+                                <td class="p-3 italic">Amoeba, Paramecium, Alga.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-slate-700">Fungi</td>
+                                <td class="p-3">Eukariotik</td>
+                                <td class="p-3">Heterotrof (Absorpsi)</td>
+                                <td class="p-3">Dinding sel kitin, tubuh hifa/miselium, spora.</td>
+                                <td class="p-3 italic">Jamur Tempe, Ragi, Jamur Tiram.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-slate-700">Plantae</td>
+                                <td class="p-3">Eukariotik</td>
+                                <td class="p-3">Autotrof (Fotosintesis)</td>
+                                <td class="p-3">Multiseluler, dinding sel selulosa, klorofil.</td>
+                                <td class="p-3 italic">Lumut, Paku, Mangga, Padi.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-slate-700">Animalia</td>
+                                <td class="p-3">Eukariotik</td>
+                                <td class="p-3">Heterotrof (Ingesti)</td>
+                                <td class="p-3">Multiseluler, tidak ada dinding sel, motil.</td>
+                                <td class="p-3 italic">Porifera s.d. Mamalia.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Identifikasi -->
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="sub-heading text-lg">D. Binomial Nomenklatur</h3>
+                    <p class="text-sm mb-3">Sistem tata nama ganda oleh Carolus Linnaeus untuk standarisasi nama spesies.</p>
+                    <div class="bg-slate-100 p-4 rounded-lg border border-slate-200 font-mono text-center mb-3">
+                        <span class="text-red-600 font-bold" title="Genus">Felis</span> 
+                        <span class="text-blue-600 italic" title="Penunjuk Spesies">catus</span>
+                    </div>
+                    <ul class="list-decimal list-inside text-sm text-slate-600 space-y-1">
+                        <li>Menggunakan bahasa Latin/dilatinkan.</li>
+                        <li>Terdiri dari 2 kata: <strong>Genus</strong> + <strong>Spesies</strong>.</li>
+                        <li>Huruf pertama Genus kapital, spesies kecil semua.</li>
+                        <li>Dicetak miring (jika diketik) atau digarisbawahi terpisah (jika tulis tangan).</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="sub-heading text-lg">E. Kunci Determinasi & Kladogram</h3>
+                    <div class="text-sm space-y-3">
+                        <div>
+                            <strong class="text-indigo-600">Kunci Dikotom:</strong>
+                            <p class="mt-1 text-slate-600">Daftar ciri-ciri yang berpasangan dan berlawanan. Kita memilih satu ciri yang sesuai hingga menemukan nama organisme.</p>
+                            <em class="text-xs text-slate-500 block mt-1">Contoh: 1a. Bertulang belakang... (ke no 2), 1b. Tidak bertulang belakang... (Invertebrata).</em>
+                        </div>
+                        <div>
+                            <strong class="text-indigo-600">Kladogram:</strong>
+                            <p class="mt-1 text-slate-600">Diagram percabangan yang menunjukkan hubungan kekerabatan evolusioner berdasarkan karakter turunan (derived characteristics).</p>
+                            <ul class="list-disc list-inside text-xs text-slate-500 mt-1 pl-2">
+                                <li><strong>Monofiletik:</strong> Nenek moyang + semua keturunan.</li>
+                                <li><strong>Parafiletik:</strong> Nenek moyang + sebagian keturunan.</li>
+                                <li><strong>Polifiletik:</strong> Berbagai organisme tanpa nenek moyang langsung yang sama.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAB 3: EKOSISTEM & INTERAKSI -->
+        <section id="bab3">
+            <div class="flex items-center mb-6 border-b-4 border-blue-500 pb-2">
+                <span class="text-4xl mr-3">🌏</span>
+                <h2 class="text-3xl font-bold text-slate-800">3. Ekosistem & Interaksi</h2>
+            </div>
+
+            <!-- Komponen & Interaksi -->
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="sub-heading text-lg">A. Komponen Ekosistem</h3>
+                    <ul class="space-y-4 text-sm mt-2">
+                        <li class="flex">
+                            <span class="bg-green-100 text-green-800 p-2 rounded-lg mr-3 h-fit font-bold">Biotik</span>
+                            <div>
+                                <strong>Makhluk Hidup:</strong>
+                                <ul class="list-disc pl-4 mt-1 text-slate-600">
+                                    <li><strong>Produsen:</strong> Tumbuhan, Alga (Autotrof).</li>
+                                    <li><strong>Konsumen:</strong> Herbivora, Karnivora (Heterotrof).</li>
+                                    <li><strong>Dekomposer:</strong> Bakteri, Jamur (Pengurai).</li>
+                                    <li><strong>Detritivor:</strong> Cacing, Luing (Pemakan bangkai/sampah).</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <span class="bg-slate-200 text-slate-800 p-2 rounded-lg mr-3 h-fit font-bold">Abiotik</span>
+                            <div>
+                                <strong>Lingkungan Fisik/Kimia:</strong>
+                                <p class="text-slate-600 mt-1">Cahaya matahari, Air, Tanah, Suhu, Kelembapan, pH, Topografi.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="sub-heading text-lg">B. Tipe Interaksi</h3>
+                    <ul class="text-sm space-y-3 mt-2">
+                        <li class="border-l-4 border-red-400 pl-3">
+                            <strong>Predasi:</strong> Mangsa dan Pemangsa. (Contoh: Singa vs Rusa).
+                        </li>
+                        <li class="border-l-4 border-yellow-400 pl-3">
+                            <strong>Kompetisi:</strong> Persaingan sumber daya (makanan/lahan). (Contoh: Sapi dan Kambing di padang rumput).
+                        </li>
+                        <li class="border-l-4 border-blue-400 pl-3">
+                            <strong>Simbiosis:</strong>
+                            <ul class="list-disc pl-4 mt-1 text-slate-600">
+                                <li><strong>Mutualisme:</strong> Saling untung (Lebah & Bunga).</li>
+                                <li><strong>Komensalisme:</strong> Satu untung, satu netral (Anggrek & Pohon Mangga).</li>
+                                <li><strong>Parasitisme:</strong> Satu untung, satu rugi (Nyamuk & Manusia).</li>
+                            </ul>
+                        </li>
+                        <li class="border-l-4 border-purple-400 pl-3">
+                            <strong>Antibiosis (Amensalisme):</strong> Satu menghambat yang lain (Jamur Penicillium mengeluarkan antibiotik menghambat bakteri).
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Aliran Energi -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-6 card-hover">
+                <h3 class="sub-heading text-xl text-center w-full border-none">C. Aliran Energi & Piramida Ekologi</h3>
+                <p class="text-center text-sm text-slate-600 mb-6">Energi mengalir dari matahari -> produsen -> konsumen. Setiap perpindahan tingkat trofik, energi berkurang drastis (hanya 10% yang diteruskan).</p>
+                
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                    <!-- Grafik -->
+                    <div class="chart-container w-full md:w-1/2">
+                        <canvas id="energyChartDetailed"></canvas>
+                    </div>
+                    <!-- Penjelasan -->
+                    <div class="w-full md:w-1/2 text-sm space-y-2">
+                        <div class="p-3 bg-green-100 rounded border border-green-300">
+                            <strong>Tingkat Trofik I (Produsen):</strong> Memiliki energi terbesar. Jumlah individu biasanya paling banyak.
+                        </div>
+                        <div class="p-3 bg-yellow-100 rounded border border-yellow-300">
+                            <strong>Tingkat Trofik II (Konsumen Primer):</strong> Herbivora. Menerima 10% energi dari produsen.
+                        </div>
+                        <div class="p-3 bg-orange-100 rounded border border-orange-300">
+                            <strong>Tingkat Trofik III (Konsumen Sekunder):</strong> Karnivora kecil.
+                        </div>
+                        <div class="p-3 bg-red-100 rounded border border-red-300">
+                            <strong>Tingkat Trofik IV (Konsumen Tersier):</strong> Top Predator. Energi paling sedikit, populasi paling kecil.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Daur Biogeokimia Singkat -->
+            <div class="bg-blue-50 rounded-xl border border-blue-200 p-6">
+                <h3 class="font-bold text-lg text-blue-800 mb-2">Catatan Tambahan: Siklus Materi</h3>
+                <p class="text-sm text-blue-900">
+                    Berbeda dengan energi yang <strong>mengalir</strong> (satu arah dan habis), materi <strong>bersiklus</strong> (daur ulang).
+                    Contoh daur biogeokimia: Daur Air, Daur Karbon (CO2 diserap tumbuhan, dilepas hewan), Daur Nitrogen (peran bakteri fiksasi nitrogen).
+                </p>
+            </div>
+
+        </section>
+
+        <footer class="text-center text-slate-400 text-sm mt-16 border-t pt-6">
+            <p>Dibuat berdasarkan Modul Kemdikbud IPA Kelas X (Edisi Revisi) & KD 3.3 Biologi.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'base' });
+
+        const ctx = document.getElementById('energyChartDetailed').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Trofik I (Produsen)', 'Trofik II (Herbivora)', 'Trofik III (Karnivora)', 'Trofik IV (Top Predator)'],
+                datasets: [{
+                    label: 'Energi Tersedia (Kkal)',
+                    data: [10000, 1000, 100, 10],
+                    backgroundColor: ['#22c55e', '#eab308', '#f97316', '#ef4444'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Hukum 10% Aliran Energi' }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Jumlah Energi' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
