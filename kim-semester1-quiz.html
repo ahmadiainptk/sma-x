@@ -65,11 +65,11 @@
         <div id="welcome-screen">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">Petunjuk Pengerjaan Soal</h2>
             <ul class="list-disc list-inside space-y-3 text-gray-700 mb-8 p-4 bg-indigo-50 rounded-lg">
-                <li>Klik tombol **Mulai Mengerjakan Soal** untuk memulai kuis.</li>
-                <li>Timer pengerjaan akan dimulai dari **0 detik** dan terus berjalan. Tidak ada batasan waktu.</li>
-                <li>Semua **35 soal** akan ditampilkan pada satu halaman.</li>
-                <li>Pilih semua jawabanmu, lalu klik tombol **Kirim Jawaban** di bagian bawah.</li>
-                <li>Setelah kirim, kamu akan melihat hasil, skor (1-100%), serta pembahasan untuk setiap soal.</li>
+                <li>Klik tombol <strong>Mulai Mengerjakan Soal</strong> untuk memulai kuis.</li>
+                <li>Timer pengerjaan akan dimulai dari <strong>0 detik</strong> dan terus berjalan. Tidak ada batasan waktu.</li>
+                <li>Semua <strong>35 soal</strong> akan ditampilkan pada satu halaman.</li>
+                <li>Pilih semua jawabanmu, lalu klik tombol <strong>Kirim Jawaban</strong> di bagian bawah.</li>
+                <li>Setelah kirim, kamu akan melihat hasil, skor (1-100%), serta pembahasan yang <strong>lengkap</strong> untuk setiap soal.</li>
             </ul>
 
             <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
@@ -156,326 +156,396 @@
             // 1. Partikel Dasar
             {
                 question: "Manakah yang merupakan 3 partikel dasar penyusun atom?",
+                correctOptionIndex: 2,
                 options: [
-                    { text: "Neutron, Deuteron, dan Triton", isCorrect: false, rationale: "Deuteron dan Triton bukan partikel dasar atom, melainkan isotop hidrogen." },
-                    { text: "Quark, Lepton, dan Foton", isCorrect: false, rationale: "Ini adalah partikel sub-atomik yang lebih mendasar, tetapi Proton dan Neutron adalah partikel dasar penyusun inti atom." },
-                    { text: "Proton, Elektron, dan Neutron", isCorrect: true, rationale: "Proton dan Neutron membentuk inti atom, sedangkan Elektron mengelilingi inti." },
-                    { text: "Kation, Anion, dan Ion", isCorrect: false, rationale: "Ini adalah bentuk atom yang bermuatan listrik." }
-                ]
+                    { text: "Neutron, Deuteron, dan Triton" },
+                    { text: "Quark, Lepton, dan Foton" },
+                    { text: "Proton, Elektron, dan Neutron" },
+                    { text: "Kation, Anion, dan Ion" }
+                ],
+                rationale: "Atom tersusun dari inti atom yang terdiri dari <strong>Proton</strong> (bermuatan positif) dan <strong>Neutron</strong> (tidak bermuatan), serta <strong>Elektron</strong> (bermuatan negatif) yang mengelilingi inti.<br>Pilihan lain salah: Deuteron dan Triton bukan partikel dasar penyusun atom, melainkan isotop hidrogen. Quark dan Lepton adalah partikel sub-atomik yang lebih mendasar. Kation dan Anion adalah bentuk atom bermuatan."
             },
             // 2. Partikel Unsur Fe
             {
                 question: "Tentukan jumlah proton ($p$), elektron ($e$), dan neutron ($n$) pada unsur $^{56}_{26}\\text{Fe}$.",
+                correctOptionIndex: 2,
                 options: [
-                    { text: "$p=26, e=26, n=56$", isCorrect: false, rationale: "Jumlah neutron adalah Nomor Massa dikurangi Nomor Atom ($56-26=30$)."},
-                    { text: "$p=56, e=56, n=30$", isCorrect: false, rationale: "Nomor atom ($26$) adalah jumlah proton dan elektron, bukan $56$."},
-                    { text: "$p=26, e=26, n=30$", isCorrect: true, rationale: "Nomor Atom ($Z=26$) adalah $p$ dan $e$. Neutron adalah $A-Z=56-26=30$." },
-                    { text: "$p=30, e=30, n=26$", isCorrect: false, rationale: "Nomor Atom ($Z$) adalah $26$, bukan $30$." }
-                ]
+                    { text: "$p=26, e=26, n=56$" },
+                    { text: "$p=56, e=56, n=30$" },
+                    { text: "$p=26, e=26, n=30$" },
+                    { text: "$p=30, e=30, n=26$" }
+                ],
+                rationale: "Nomor Atom ($Z=26$) menentukan jumlah <strong>Proton</strong> ($p=26$).<br>Untuk atom netral, jumlah <strong>Elektron</strong> ($e$) = $p = 26$.<br><strong>Neutron</strong> ($n$) dihitung dari Nomor Massa ($A=56$) dikurangi Nomor Atom ($Z$): $n = A - Z = 56 - 26 = 30$."
             },
             // 3. Nomor Massa Atom X
             {
                 question: "Suatu atom netral mempunyai 3 kulit atom dan 7 elektron valensi. Jika dalam intinya terdapat 18 neutron, berapakah nomor massa ($A$) atom tersebut?",
+                correctOptionIndex: 2,
                 options: [
-                    { text: "$17$", isCorrect: false, rationale: "Angka $17$ hanya merupakan Nomor Atom ($Z$)."},
-                    { text: "$25$", isCorrect: false, rationale: "Nomor Atom ($Z$) adalah $17$, sehingga $A$ seharusnya $17+18=35$."},
-                    { text: "$35$", isCorrect: true, rationale: "Konfigurasi elektron atom adalah $2-8-7$, sehingga $Z=17$. Nomor massa $A = Z+n = 17+18=35$." },
-                    { text: "$40$", isCorrect: false, rationale: "Nilai ini tidak sesuai dengan perhitungan dari jumlah proton dan neutron." }
-                ]
+                    { text: "$17$" },
+                    { text: "$25$" },
+                    { text: "$35$" },
+                    { text: "$40$" }
+                ],
+                rationale: "Atom memiliki 3 kulit dan 7 elektron valensi, sehingga konfigurasi elektronnya adalah $2-8-7$.<br>Jumlah Elektron Total = $2+8+7 = 17$.<br>Karena atom netral, jumlah <strong>Proton</strong> ($Z$) = $17$.<br>Nomor Massa ($A$) adalah jumlah proton ditambah neutron: $A = Z + n = 17 + 18 = 35$."
             },
             // 4. Definisi Isotop, Isoton, Isobar
             {
-                question: "Apa definisi yang benar mengenai **isobar**?",
+                question: "Apa definisi yang benar mengenai <strong>isobar</strong>?",
+                correctOptionIndex: 2,
                 options: [
-                    { text: "Atom-atom yang memiliki nomor atom ($Z$) sama tetapi nomor massa ($A$) berbeda.", isCorrect: false, rationale: "Ini adalah definisi dari isotop."},
-                    { text: "Atom-atom dari unsur yang berbeda yang memiliki jumlah neutron ($n$) sama.", isCorrect: false, rationale: "Ini adalah definisi dari isoton."},
-                    { text: "Atom-atom dari unsur yang berbeda yang memiliki nomor massa ($A$) sama.", isCorrect: true, rationale: "Isobar berasal dari kata $iso$ (sama) dan $bar$ (massa/berat), yang berarti memiliki nomor massa yang sama." },
-                    { text: "Atom-atom yang memiliki jumlah elektron valensi sama.", isCorrect: false, rationale: "Ini adalah ciri-ciri atom yang berada dalam golongan yang sama." }
-                ]
+                    { text: "Atom-atom yang memiliki nomor atom ($Z$) sama tetapi nomor massa ($A$) berbeda." },
+                    { text: "Atom-atom dari unsur yang berbeda yang memiliki jumlah neutron ($n$) sama." },
+                    { text: "Atom-atom dari unsur yang berbeda yang memiliki nomor massa ($A$) sama." },
+                    { text: "Atom-atom yang memiliki jumlah elektron valensi sama." }
+                ],
+                rationale: "Isobar ($iso$=sama, $bar$=massa/berat) adalah atom-atom dari unsur yang berbeda yang memiliki <strong>Nomor Massa ($A$) yang sama</strong>.<br>Pilihan A adalah <strong>Isotop</strong> ($Z$ sama). Pilihan B adalah <strong>Isoton</strong> ($n$ sama)."
             },
             // 5. Pasangan Isotop, Isoton, Isobar
             {
-                question: "Dari daftar $^{16}_{8}\\text{O}$, $^{14}_{7}\\text{N}$, $^{23}_{11}\\text{Na}$, $^{24}_{12}\\text{Mg}$, dan $^{14}_{6}\\text{C}$, manakah pasangan yang termasuk **isoton**?",
+                question: "Dari daftar $^{16}_{8}\\text{O}$, $^{14}_{7}\\text{N}$, $^{23}_{11}\\text{Na}$, $^{24}_{12}\\text{Mg}$, dan $^{14}_{6}\\text{C}$, manakah pasangan yang termasuk <strong>isoton</strong>?",
+                correctOptionIndex: 2,
                 options: [
-                    { text: "$^{16}_{8}\\text{O}$ dan $^{15}_{8}\\text{O}$ (Isotop)", isCorrect: false, rationale: "Pasangan ini memiliki Nomor Atom sama ($Z=8$)."},
-                    { text: "$^{14}_{7}\\text{N}$ dan $^{14}_{6}\\text{C}$ (Isobar)", isCorrect: false, rationale: "Pasangan ini memiliki Nomor Massa sama ($A=14$)."},
-                    { text: "$^{23}_{11}\\text{Na}$ dan $^{24}_{12}\\text{Mg}$ (Isoton)", isCorrect: true, rationale: "Keduanya memiliki jumlah neutron $12$: $23-11=12$ dan $24-12=12$." },
-                    { text: "$^{23}_{11}\\text{Na}$ dan $^{14}_{6}\\text{C}$ (Tidak ada hubungan)", isCorrect: false, rationale: "Tidak ada hubungan isotop, isoton, atau isobar antara keduanya." }
-                ]
+                    { text: "$^{16}_{8}\\text{O}$ dan $^{15}_{8}\\text{O}$ (Isotop)" },
+                    { text: "$^{14}_{7}\\text{N}$ dan $^{14}_{6}\\text{C}$ (Isobar)" },
+                    { text: " $^{23}_{11}\\text{Na}$ dan $^{24}_{12}\\text{Mg}$ (Isoton)" },
+                    { text: "$^{23}_{11}\\text{Na}$ dan $^{14}_{6}\\text{C}$ (Tidak ada hubungan)" }
+                ],
+                rationale: "Isoton adalah pasangan yang memiliki jumlah <strong>Neutron ($n$) yang sama</strong>.<br>Hitung $n$ untuk setiap pasangan:<br>- $^{23}_{11}\\text{Na}$: $n = 23 - 11 = 12$<br>- $^{24}_{12}\\text{Mg}$: $n = 24 - 12 = 12$<br>Karena $n$ sama ($12$), pasangan ini adalah <strong>isoton</strong>."
             },
             // 6. Pernyataan Isoton (Benar-Salah)
             {
-                question: "Unsur $A$ ($10$ proton, $12$ neutron) dan $B$ ($A=23, Z=11$) termasuk **isoton**. (Benar / Salah)",
+                question: "Unsur $A$ ($10$ proton, $12$ neutron) dan $B$ ($A=23, Z=11$) termasuk <strong>isoton</strong>. (Benar / Salah)",
+                correctOptionIndex: 0,
                 options: [
-                    { text: "Benar", isCorrect: true, rationale: "Unsur $A$ memiliki $n=12$. Unsur $B$ memiliki $n=23-11=12$. Jumlah neutron sama, sehingga isoton." },
-                    { text: "Salah", isCorrect: false, rationale: "Keduanya memiliki jumlah neutron yang sama, yaitu $12$, sehingga diklasifikasikan sebagai isoton." }
-                ]
+                    { text: "Benar" },
+                    { text: "Salah" }
+                ],
+                rationale: "Unsur $A$ memiliki $n=12$ (diberikan).<br>Unsur $B$ memiliki $n = A - Z = 23 - 11 = 12$.<br>Karena jumlah neutron keduanya sama ($12$) dan nomor atomnya berbeda ($10 \\neq 11$), maka keduanya adalah <strong>Isoton</strong>. Pernyataan ini <strong>Benar</strong>."
             },
             // 7. Teori Atom Bohr
             {
                 question: "Manakah pernyataan yang paling tepat menjelaskan teori atom Niels Bohr?",
+                correctOptionIndex: 2,
                 options: [
-                    { text: "Elektron tersebar merata dalam atom seperti roti kismis.", isCorrect: false, rationale: "Ini adalah model atom Thomson."},
-                    { text: "Elektron bergerak mengelilingi inti pada lintasan acak sambil memancarkan energi secara terus-menerus.", isCorrect: false, rationale: "Ini adalah kelemahan model Rutherford yang diperbaiki Bohr."},
-                    { text: "Elektron hanya dapat berada pada orbit stasioner tertentu tanpa memancarkan energi.", isCorrect: true, rationale: "Bohr menyatakan elektron menempati kulit atom dengan tingkat energi diskrit (stasioner)." },
-                    { text: "Atom terdiri dari inti yang sangat kecil dan padat dikelilingi oleh elektron.", isCorrect: false, rationale: "Ini adalah model atom Rutherford." }
-                ]
+                    { text: "Elektron tersebar merata dalam atom seperti roti kismis." },
+                    { text: "Elektron bergerak mengelilingi inti pada lintasan acak sambil memancarkan energi secara terus-menerus." },
+                    { text: "Elektron hanya dapat berada pada orbit stasioner tertentu tanpa memancarkan energi. [Image of Model atom Bohr]" },
+                    { text: "Atom terdiri dari inti yang sangat kecil dan padat dikelilingi oleh elektron." }
+                ],
+                rationale: "Teori Bohr menyatakan bahwa elektron bergerak mengelilingi inti pada <strong>orbit stasioner</strong> (kulit atom) dengan energi tetap (diskrit) dan <strong>tidak memancarkan energi</strong> selama berada di orbit tersebut. Energi hanya diserap/dipancarkan saat elektron berpindah kulit (eksitasi/de-eksitasi). [Image of Model atom Bohr]"
             },
             // 8. Konfigurasi dan Letak 35/80 X
             {
-                question: "Konfigurasi elektron (Bohr) dan letak unsur $^{80}_{35}\\text{X}$ dalam tabel periodik adalah...",
+                question: "Tuliskan Konfigurasi elektron (Bohr) dan tentukan letak unsur $^{80}_{35}\\text{X}$ dalam tabel periodik.",
+                correctOptionIndex: 1,
                 options: [
-                    { text: "$2-8-8-17$; Golongan $VIIA$, Periode $4$", isCorrect: false, rationale: "Kulit ketiga (M) maksimum $18$ elektron."},
-                    { text: "$2-8-18-7$; Golongan $VIIA$, Periode $4$", isCorrect: true, rationale: "Konfigurasinya $2-8-18-7$ ($Z=35$). $e$ valensi $7 \\rightarrow VIIA$. $4$ kulit $\\rightarrow$ Periode $4$." },
-                    { text: "$2-8-18-7$; Golongan $VIIB$, Periode $4$", isCorrect: false, rationale: "Golongan $VIIB$ menggunakan subkulit $d$ dan $s$, bukan $p$ (Golongan $VIIA$)."},
-                    { text: "$2-8-17$; Golongan $VIIA$, Periode $3$", isCorrect: false, rationale: "Unsur ini memiliki $4$ kulit, bukan $3$." }
-                ]
+                    { text: "$2-8-8-17$; Golongan $VIIA$, Periode $4$" },
+                    { text: "$2-8-18-7$; Golongan $VIIA$, Periode $4$" },
+                    { text: "$2-8-18-7$; Golongan $VIIB$, Periode $4$" },
+                    { text: "$2-8-17$; Golongan $VIIA$, Periode $3$" }
+                ],
+                rationale: "Nomor atom $Z=35$.<br>- <strong>Konfigurasi Bohr</strong>: Pengisian kulit ($K, L, M, N$): $2-8-18-7$ (total 35).<br>- <strong>Periode</strong>: Jumlah kulit = $4 \\rightarrow$ <strong>Periode 4</strong>.<br>- <strong>Golongan</strong>: Elektron valensi (kulit terluar) = $7 \\rightarrow$ <strong>Golongan VIIA</strong>."
             },
             // 9. Bilangan Kuantum Azimut (Benar-Salah)
             {
                 question: "Bilangan kuantum azimut ($\\ell$) berfungsi untuk menyatakan sub kulit. (Benar / Salah)",
+                correctOptionIndex: 0,
                 options: [
-                    { text: "Benar", isCorrect: true, rationale: "Bilangan kuantum azimut ($\\ell$) menentukan bentuk sub kulit, di mana $\\ell=0$ (s), $\\ell=1$ (p), $\\ell=2$ (d), dan $\\ell=3$ (f)." },
-                    { text: "Salah", isCorrect: false, rationale: "Fungsi $\\ell$ adalah memang untuk menyatakan bentuk sub kulit." }
-                ]
+                    { text: "Benar" },
+                    { text: "Salah" }
+                ],
+                rationale: "Fungsi bilangan kuantum azimut ($\\ell$) adalah menentukan <strong>bentuk sub kulit</strong> (orbital) dan sub tingkat energi. Nilai $\\ell=0, 1, 2, 3$ berturut-turut untuk sub kulit $s, p, d, f$. Pernyataan ini <strong>Benar</strong>."
             },
             // 10. Kapasitas Elektron d dan f
             {
                 question: "Sub kulit $d$ maksimum menampung elektron sebanyak $X$, sedangkan sub kulit $f$ menampung $Y$. Nilai $X$ dan $Y$ adalah...",
+                correctOptionIndex: 1,
                 options: [
-                    { text: "$X=6, Y=10$", isCorrect: false, rationale: "Sub kulit $p$ menampung $6$ elektron, dan $d$ menampung $10$ elektron."},
-                    { text: "$X=10, Y=14$", isCorrect: true, rationale: "Sub kulit $d$ memiliki 5 orbital ($5\\times 2 = 10$), dan $f$ memiliki 7 orbital ($7\\times 2 = 14$)." },
-                    { text: "$X=10, Y=18$", isCorrect: false, rationale: "Maksimum elektron pada $f$ adalah $14$."},
-                    { text: "$X=14, Y=18$", isCorrect: false, rationale: "Nilai ini terbalik." }
-                ]
+                    { text: "$X=6, Y=10$" },
+                    { text: "$X=10, Y=14$" },
+                    { text: "$X=10, Y=18$" },
+                    { text: "$X=14, Y=18$" }
+                ],
+                rationale: "Jumlah elektron maksimum = $2 \\times$ (Jumlah Orbital).<br>- Sub kulit $d$ memiliki 5 orbital ($m$: $-2, -1, 0, +1, +2$). Maka $X = 5 \\times 2 = <strong>10$</strong>.<br>- Sub kulit $f$ memiliki 7 orbital ($m$: $-3$ sampai $+3$). Maka $Y = 7 \\times 2 = <strong>14$</strong>."
             },
             // 11. Kisaran Kuantum Magnetik f
             {
                 question: "Harga $m$ (kuantum magnetik) yang dimiliki sub kulit $f$ memiliki kisaran harga $-3$ sampai $+3$. (Benar / Salah)",
+                correctOptionIndex: 0,
                 options: [
-                    { text: "Benar", isCorrect: true, rationale: "Untuk sub kulit $f$, $\\ell=3$. Nilai $m$ berkisar dari $-\\ell$ hingga $+\\ell$, yaitu $-3, -2, -1, 0, +1, +2, +3$." },
-                    { text: "Salah", isCorrect: false, rationale: "Pernyataan ini benar, sesuai dengan aturan bilangan kuantum." }
-                ]
+                    { text: "Benar" },
+                    { text: "Salah" }
+                ],
+                rationale: "Nilai bilangan kuantum magnetik ($m$) berkisar dari $-\\ell$ hingga $+\\ell$. Untuk sub kulit $f$, nilai azimutnya adalah $\\ell=3$. Jadi, $m$ adalah $-3, -2, -1, 0, +1, +2, +3$. Pernyataan ini <strong>Benar</strong>."
             },
             // 12. Spin dalam Satu Orbital
             {
                 question: "Apakah dua elektron dalam satu orbital dapat memiliki spin yang sama? Jelaskan alasannya.",
+                correctOptionIndex: 2,
                 options: [
-                    { text: "Ya, karena spin tidak terikat pada orbital.", isCorrect: false, rationale: "Spin adalah bilangan kuantum keempat yang harus berbeda jika ketiga bilangan kuantum lainnya sama."},
-                    { text: "Tidak, karena keduanya akan saling tolak-menolak dengan kuat.", isCorrect: false, rationale: "Alasannya adalah Asas Larangan Pauli, bukan hanya tolakan muatan."},
-                    { text: "Tidak, sesuai Asas Larangan Pauli, spin harus berlawanan ($\\frac{1}{2}$ dan $-\\frac{1}{2}$).", isCorrect: true, rationale: "Asas Larangan Pauli menyatakan bahwa tidak boleh ada dua elektron dalam atom yang memiliki keempat bilangan kuantum yang sama." },
-                    { text: "Ya, asalkan mereka memiliki energi yang sama.", isCorrect: false, rationale: "Spin harus tetap berlawanan meskipun energinya sama." }
-                ]
+                    { text: "Ya, karena spin tidak terikat pada orbital." },
+                    { text: "Tidak, karena keduanya akan saling tolak-menolak dengan kuat." },
+                    { text: "Tidak, sesuai Asas Larangan Pauli, spin harus berlawanan ($\\frac{1}{2}$ dan $-\\frac{1}{2}$). " },
+                    { text: "Ya, asalkan mereka memiliki energi yang sama." }
+                ],
+                rationale: "Jawabannya adalah <strong>Tidak</strong>. Hal ini sesuai dengan <strong>Asas Larangan Pauli</strong>, yang menyatakan bahwa tidak boleh ada dua elektron dalam satu atom yang memiliki keempat bilangan kuantum ($n, \\ell, m, s$) yang sama. Jika $n, \\ell,$ dan $m$ sama (berada di orbital yang sama), maka $s$ harus berlawanan ($\\pm \\frac{1}{2}$) untuk membedakan keduanya. "
             },
             // 13. Konfigurasi Elektron 52/26 X (Benar-Salah)
             {
                 question: "Konfigurasi elektron unsur $^{52}_{26}\\text{X}$ (Nomor Atom $26$) adalah $[\\text{Ar}] 4s^2 3d^4$. (Benar / Salah)",
+                correctOptionIndex: 1,
                 options: [
-                    { text: "Benar", isCorrect: false, rationale: "Konfigurasi yang benar untuk $Z=26$ adalah $[\\text{Ar}] 4s^2 3d^6$ (Besi/Fe). Konfigurasi $3d^4$ terjadi pada $Z=24$ (Kromium) sebagai $[\\text{Ar}] 4s^1 3d^5$." },
-                    { text: "Salah", isCorrect: true, rationale: "Nomor atom $Z=26$ memiliki konfigurasi $[\\text{Ar}] 4s^2 3d^6$ (Besi/Fe)." }
-                ]
+                    { text: "Benar" },
+                    { text: "Salah" }
+                ],
+                rationale: "Nomor atom $Z=26$. Berdasarkan Aturan Aufbau, konfigurasi yang benar adalah $1s^2 \\dots 3p^6 4s^2 3d^6$ atau disingkat $[\\text{Ar}] 4s^2 3d^6$ (Besi/Fe). Konfigurasi yang diberikan salah, karena $[\\text{Ar}] 4s^2 3d^4$ hanya memiliki 24 elektron. Pernyataan ini <strong>Salah</strong>."
             },
             // 14. Konfigurasi Ion Fe3+ (Benar-Salah)
             {
                 question: "Konfigurasi elektron ion $\\text{Fe}^{3+}$ (Nomor Atom $\\text{Fe}=26$) adalah $[\\text{Ar}] 4s^0 3d^5$. (Benar / Salah)",
+                correctOptionIndex: 0,
                 options: [
-                    { text: "Benar", isCorrect: true, rationale: "Konfigurasi $\\text{Fe}$ adalah $[\\text{Ar}] 4s^2 3d^6$. Pelepasan $3e^-$ dimulai dari $4s$ (terluar) dan kemudian $3d$ ($2e^-$ dari $4s$ dan $1e^-$ dari $3d$). Hasilnya adalah $[\\text{Ar}] 3d^5$." },
-                    { text: "Salah", isCorrect: false, rationale: "Pernyataan ini benar karena pelepasan elektron dimulai dari orbital terluar $4s$." }
-                ]
+                    { text: "Benar" },
+                    { text: "Salah" }
+                ],
+                rationale: "1. Konfigurasi $\\text{Fe}$ netral ($Z=26$): $[\\text{Ar}] 4s^2 3d^6$.<br>2. Ion $\\text{Fe}^{3+}$ terbentuk dengan melepaskan $3$ elektron. Pelepasan selalu dimulai dari <strong>kulit terluar</strong> ($n$ terbesar), yaitu $4s$.<br>3. Pelepasan $2e^-$ dari $4s$ dan $1e^-$ sisanya dari $3d$.<br>4. Hasil: $[\\text{Ar}] 4s^0 3d^{6-1} = <strong>[\\text{Ar}] 3d^5$</strong>. Pernyataan ini <strong>Benar</strong>."
             },
             // 15. Bilangan Kuantum Ca
             {
-                question: "Tentukan harga keempat bilangan kuantum ($n, \\ell, m, s$) untuk elektron terakhir unsur $^{40}_{20}\\text{Ca}$.",
+                question: "Tentukan harga keempat bilangan kuantum ($n, \\ell, m, s$) untuk elektron terakhir dari unsur $^{40}_{20}\\text{Ca}$.",
+                correctOptionIndex: 1,
                 options: [
-                    { text: "$n=3, \\ell=2, m=0, s=-1/2$", isCorrect: false, rationale: "Elektron terakhir berada di kulit $4s$, bukan $3d$."},
-                    { text: "$n=4, \\ell=0, m=0, s=-1/2$", isCorrect: true, rationale: "Konfigurasi $20\\text{Ca}$ adalah $\\dots 4s^2$. Elektron ke-$20$ berada di $4s$, sehingga $n=4, \\ell=0, m=0$, dan spin terakhir adalah $s=-1/2$." },
-                    { text: "$n=4, \\ell=1, m=-1, s=+1/2$", isCorrect: false, rationale: "Elektron terakhir berada di subkulit $s$, bukan $p$ ($\\ell=1$)."},
-                    { text: "$n=4, \\ell=0, m=0, s=+1/2$", isCorrect: false, rationale: "Elektron terakhir pada $s^2$ memiliki spin berlawanan, yaitu $-1/2$." }
-                ]
+                    { text: "$n=3, \\ell=2, m=0, s=-1/2$" },
+                    { text: "$n=4, \\ell=0, m=0, s=-1/2$" },
+                    { text: "$n=4, \\ell=1, m=-1, s=+1/2$" },
+                    { text: "$n=4, \\ell=0, m=0, s=+1/2$" }
+                ],
+                rationale: "1. Konfigurasi $20\\text{Ca}$: $1s^2 \\dots 3p^6 \\mathbf{4s^2}$.<br>2. Elektron terakhir (ke-20) berada di $\\mathbf{4s^2}$.<br>- <strong>$n$</strong> (Kulit) = 4<br>- <strong>$\\ell$</strong> (Subkulit $s$) = 0<br>- <strong>$m$</strong> (Orbital $s$) = 0<br>- <strong>$s$</strong> (Spin elektron kedua/berpasangan) = $-\\frac{1}{2}$."
             },
             // 16. Nomor Atom X dari Bilangan Kuantum Ion
             {
                 question: "Bilangan kuantum elektron terakhir ion $\\text{X}^{2+}$ adalah $n=3, \\ell=2, m=+2, s=+1/2$. Berapakah nomor atom unsur $X$?",
+                correctOptionIndex: 0,
                 options: [
-                    { text: "$25$", isCorrect: true, rationale: "Elektron terakhir $\\text{X}^{2+}$ berada di $3d^5$. Jumlah $e$ ion adalah $18+5=23$. $X$ netral ($23+2$) memiliki $Z=25$." },
-                    { text: "$23$", isCorrect: false, rationale: "Ini adalah nomor atom ion $\\text{X}^{2+}$ ($23$ elektron), bukan atom netral $X$."},
-                    { text: "$27$", isCorrect: false, rationale: "Jika $Z=27$ (Co), $\\text{Co}^{2+}$ memiliki konfigurasi $[\\text{Ar}] 3d^7$ dan elektron terakhirnya di $m=0, s=-1/2$." },
-                    { text: "$28$", isCorrect: false, rationale: "Jika $Z=28$ (Ni), $\\text{Ni}^{2+}$ memiliki konfigurasi $[\\text{Ar}] 3d^8$." }
-                ]
+                    { text: "$25$" },
+                    { text: "$23$" },
+                    { text: "$27$" },
+                    { text: "$28$" }
+                ],
+                rationale: "1. $n=3, \\ell=2 \\rightarrow$ Elektron berada di subkulit <strong>$3d$</strong>.<br>2. $m=+2, s=+1/2$ adalah elektron pengisi orbital $3d$ yang <strong>kelima</strong> (sesuai Aturan Hund).<br>3. Konfigurasi $\\text{X}^{2+}$ berakhir di $3d^5$. Total $e^-$ ion: $[\\text{Ar}] 3d^5 = 18 + 5 = 23$ elektron.<br>4. Atom $X$ netral ($e$ total $23 + 2$): $Z=25$. <strong>Nomor atomnya adalah 25</strong>."
             },
             // 17. Elektron Tidak Berpasangan Z=23
             {
                 question: "Pada atom yang bernomor $23$ ($V$), terdapat elektron yang tidak berpasangan sebanyak...",
+                correctOptionIndex: 1,
                 options: [
-                    { text: "$2$", isCorrect: false, rationale: "Unsur $V$ memiliki $3$ elektron di orbital $3d$ yang semuanya tunggal."},
-                    { text: "$3$", isCorrect: true, rationale: "Konfigurasi $Z=23$ adalah $[\\text{Ar}] 4s^2 3d^3$. Orbital $3d$ memiliki $3$ elektron tunggal (tidak berpasangan) sesuai Aturan Hund." },
-                    { text: "$4$", isCorrect: false, rationale: "Unsur dengan $4$ elektron tak berpasangan adalah $\\text{Cr}$ ($4s^1 3d^5$)."},
-                    { text: "$5$", isCorrect: false, rationale: "Unsur dengan $5$ elektron tak berpasangan adalah $\\text{Mn}$ ($4s^2 3d^5$)."}
-                ]
+                    { text: "$2$" },
+                    { text: "$3$" },
+                    { text: "$4$" },
+                    { text: "$5$" }
+                ],
+                rationale: "1. Konfigurasi $Z=23$ ($V$): $[\\text{Ar}] 4s^2 \\mathbf{3d^3}$.<br>2. Orbital $4s^2$ terisi penuh (berpasangan).<br>3. Orbital $3d$ memiliki $3$ elektron. Berdasarkan <strong>Aturan Hund</strong>, $3$ elektron ini mengisi orbital tunggal dengan spin paralel.<br>4. Terdapat <strong>3 elektron tidak berpasangan</strong> dalam orbital $3d$."
             },
             // 18. Letak Unsur 24/52 X
             {
                 question: "Tentukan letak unsur $^{52}_{24}\\text{X}$ ($Z=24$) dalam Sistem Periodik Unsur (SPU).",
+                correctOptionIndex: 0,
                 options: [
-                    { text: "Periode 4, Golongan VIB", isCorrect: true, rationale: "Konfigurasi $Z=24$ ($Cr$) adalah $[\\text{Ar}] 4s^1 3d^5$. $n$ terbesar $4 \\rightarrow$ Periode $4$. $e$ valensi $1+5=6 \\rightarrow$ Golongan VIB." },
-                    { text: "Periode 4, Golongan IVA", isCorrect: false, rationale: "Golongan $\\text{IVA}$ memiliki $e$ valensi $4$ pada $s$ dan $p$."},
-                    { text: "Periode 3, Golongan VIB", isCorrect: false, rationale: "Unsur ini memiliki kulit $4$ ($4s^1$)."},
-                    { text: "Periode 4, Golongan VB", isCorrect: false, rationale: "Golongan $\\text{VB}$ memiliki $e$ valensi $5$ (Contoh $V, 4s^2 3d^3$)." }
-                ]
+                    { text: "Periode 4, Golongan VIB" },
+                    { text: "Periode 4, Golongan IVA" },
+                    { text: "Periode 3, Golongan VIB" },
+                    { text: "Periode 4, Golongan VB" }
+                ],
+                rationale: "1. Konfigurasi $Z=24$ ($\text{Cr}$): $[\\text{Ar}] \\mathbf{4s^1 3d^5}$ (Anomali kestabilan setengah penuh).<br>2. <strong>Periode</strong>: $n$ terbesar $4 \\rightarrow$ <strong>Periode 4</strong>.<br>3. <strong>Golongan</strong> ($s+d$): $1 + 5 = 6 \\rightarrow$ <strong>Golongan VIB</strong>."
             },
             // 19. Sistem Triad Dobereiner
             {
                 question: "Jelaskan dasar pengelompokkan unsur berdasarkan sistem Triad Dobereiner.",
+                correctOptionIndex: 2,
                 options: [
-                    { text: "Unsur dikelompokkan berdasarkan kenaikan nomor atom.", isCorrect: false, rationale: "Ini adalah dasar pengelompokan SPU Modern (Moseley)."},
-                    { text: "Sifat unsur berulang setiap 8 unsur.", isCorrect: false, rationale: "Ini adalah dasar Hukum Oktaf Newlands."},
-                    { text: "Unsur dikelompokkan menjadi tiga-tiga (triad) di mana unsur tengah memiliki sifat dan massa rata-rata unsur pertama dan ketiga.", isCorrect: true, rationale: "Dobereiner mengelompokkan unsur menjadi tiga berdasarkan kesamaan sifat dan keteraturan massa atom relatif." },
-                    { text: "Unsur dikelompokkan berdasarkan konfigurasi elektron terluar.", isCorrect: false, rationale: "Ini adalah dasar penentuan golongan dan periode." }
-                ]
+                    { text: "Unsur dikelompokkan berdasarkan kenaikan nomor atom." },
+                    { text: "Sifat unsur berulang setiap 8 unsur." },
+                    { text: "Unsur dikelompokkan menjadi tiga-tiga (triad) di mana unsur tengah memiliki sifat dan massa rata-rata unsur pertama dan ketiga." },
+                    { text: "Unsur dikelompokkan berdasarkan konfigurasi elektron terluar." }
+                ],
+                rationale: "Dobereiner mengelompokkan unsur menjadi tiga (triad) berdasarkan kesamaan sifat. Ciri utamanya: <strong>massa atom relatif unsur yang di tengah mendekati rata-rata massa atom unsur pertama dan ketiga</strong>."
             },
             // 20. Dasar Pengelompokan SPU Modern
             {
                 question: "Apa dasar pengelompokkan unsur pada SPU Modern?",
+                correctOptionIndex: 1,
                 options: [
-                    { text: "Berdasarkan kenaikan massa atom relatif dan kesamaan sifat kimia.", isCorrect: false, rationale: "Ini adalah dasar pengelompokan Mendeleyev."},
-                    { text: "Berdasarkan kenaikan nomor atom ($Z$).", isCorrect: true, rationale: "SPU Modern didasarkan pada penemuan Moseley, yang menyusun unsur berdasarkan kenaikan nomor atom." },
-                    { text: "Berdasarkan jumlah kulit atom dan jumlah proton.", isCorrect: false, rationale: "Hanya berdasarkan Nomor Atom ($Z$)."},
-                    { text: "Berdasarkan penemuan sinar-X oleh Rontgen.", isCorrect: false, rationale: "Penemuan sinar-X tidak langsung menjadi dasar pengelompokan SPU." }
-                ]
+                    { text: "Berdasarkan kenaikan massa atom relatif dan kesamaan sifat kimia." },
+                    { text: "Berdasarkan kenaikan nomor atom ($Z$)." },
+                    { text: "Berdasarkan jumlah kulit atom dan jumlah proton." },
+                    { text: "Berdasarkan penemuan sinar-X oleh Rontgen." }
+                ],
+                rationale: "SPU Modern (ditemukan oleh Moseley) disusun berdasarkan <strong>kenaikan nomor atom ($Z$)</strong>. Dasar ini menunjukkan bahwa sifat-sifat unsur berulang secara periodik seiring kenaikan $Z$, dan ini digunakan bersama dengan kesamaan konfigurasi elektron terluar."
             },
             // 21. Unsur Golongan Sama
             {
-                question: "Manakah di antara unsur-unsur ${}_{3}\\text{P}, {}_{12}\\text{Q}, {}_{19}\\text{R}, {}_{33}\\text{S}, dan {}_{53}\\text{T}$ yang terletak dalam **golongan yang sama**?",
+                question: "Manakah di antara unsur-unsur ${}_{3}\\text{P}, {}_{12}\\text{Q}, {}_{19}\\text{R}, {}_{33}\\text{S}, dan {}_{53}\\text{T}$ yang terletak dalam <strong>golongan yang sama</strong>?",
+                correctOptionIndex: 1,
                 options: [
-                    { text: "P ($Z=3$) dan Q ($Z=12$)", isCorrect: false, rationale: "P adalah Golongan IA ($2s^1$), Q adalah Golongan IIA ($3s^2$)." },
-                    { text: "P ($Z=3$) dan R ($Z=19$)", isCorrect: true, rationale: "P ($2s^1$) dan R ($4s^1$) sama-sama memiliki $1$ elektron valensi, sehingga keduanya berada di Golongan IA." },
-                    { text: "Q ($Z=12$) dan S ($Z=33$)", isCorrect: false, rationale: "Q adalah IIA, S ($4s^2 4p^3$) adalah VA." },
-                    { text: "S ($Z=33$) dan T ($Z=53$)", isCorrect: false, rationale: "S adalah VA, T ($5s^2 5p^5$) adalah VIIA." }
-                ]
+                    { text: "P ($Z=3$) dan Q ($Z=12$)" },
+                    { text: "P ($Z=3$) dan R ($Z=19$)" },
+                    { text: "Q ($Z=12$) dan S ($Z=33$)" },
+                    { text: "S ($Z=33$) dan T ($Z=53$)" }
+                ],
+                rationale: "Golongan ditentukan oleh <strong>elektron valensi</strong>:<br>- $\\text{P} (Z=3)$: $2s^1 \\rightarrow$ Golongan <strong>IA</strong><br>- $\\text{Q} (Z=12)$: $3s^2 \\rightarrow$ Golongan IIA<br>- $\\text{R} (Z=19)$: $4s^1 \\rightarrow$ Golongan <strong>IA</strong><br>- $\\text{S} (Z=33)$: $4s^2 4p^3 \\rightarrow$ Golongan VA<br>- $\\text{T} (Z=53)$: $5s^2 5p^5 \\rightarrow$ Golongan VIIA<br>Pasangan $\\text{P}$ dan $\\text{R}$ memiliki 1 elektron valensi, sehingga berada di Golongan IA."
             },
             // 22. Kesimpulan Keelektronegatifan (Benar-Salah)
             {
-                question: "Diketahui unsur $R$ di paling kanan periode dan $Q$ di paling atas golongan $R$. Kesimpulan keelektronegatifan: $R > S > P > Q$. (Benar / Salah)",
+                question: "Perhatikan tren sifat periodik. Kesimpulan keelektronegatifan unsur: $R > S > P > Q$. (Benar / Salah)",
+                correctOptionIndex: 1,
                 options: [
-                    { text: "Benar", isCorrect: false, rationale: "Keelektronegatifan cenderung meningkat dari kiri ke kanan (periode) dan dari bawah ke atas (golongan). Oleh karena itu, $Q$ (paling atas/kanan) seharusnya memiliki keelektronegatifan tertinggi." },
-                    { text: "Salah", isCorrect: true, rationale: "Keelektronegatifan tertinggi adalah $Q$. Urutan yang benar seharusnya adalah $Q > R > S > P$." }
-                ]
+                    { text: "Benar" },
+                    { text: "Salah" }
+                ],
+                rationale: "Sifat <strong>Keelektronegatifan</strong> cenderung <strong>meningkat dari kiri ke kanan (periode)</strong> dan <strong>dari bawah ke atas (golongan)</strong>. Karena $Q$ berada paling atas/kanan, maka $Q$ harus memiliki nilai keelektronegatifan tertinggi (paling elektronegatif). Urutan yang benar seharusnya adalah $Q > R > S > P$. Pernyataan yang diberikan <strong>Salah</strong>. "
             },
             // 23. Unsur X (Z=20) termasuk Halogen (Benar-Salah)
             {
                 question: "Unsur $\\text{X}$ dengan Nomor Atom $20$ termasuk dalam kelompok unsur halogen. (Benar / Salah)",
+                correctOptionIndex: 1,
                 options: [
-                    { text: "Benar", isCorrect: false, rationale: "Unsur $Z=20$ ($\\text{Ca}$) berada di Golongan IIA (Alkali Tanah). Halogen adalah Golongan VIIA." },
-                    { text: "Salah", isCorrect: true, rationale: "Unsur $Z=20$ adalah Kalsium ($\\text{Ca}$), yang termasuk dalam kelompok Alkali Tanah (Golongan IIA)." }
-                ]
+                    { text: "Benar" },
+                    { text: "Salah" }
+                ],
+                rationale: "Unsur $\\text{X}$ dengan $Z=20$ (Kalsium, $\\text{Ca}$) memiliki konfigurasi $4s^2$. Elektron valensi $2 \\rightarrow$ <strong>Golongan IIA</strong>. Kelompok ini dinamakan <strong>Alkali Tanah</strong>.<br>Halogen adalah nama untuk Golongan VIIA. Pernyataan ini <strong>Salah</strong>."
             },
             // 24. Unsur Satu Golongan Transisi B (Benar-Salah)
             {
-                question: "Unsur yang berada dalam satu golongan transisi ($B$) adalah $Q$ dan $R$, dengan konfigurasi $Q=[\\text{Ne}] 3s^2 3p^6$ dan $R=[\\text{Ar}] 4s^2 3d^{10} 4p^6$. (Benar / Salah)",
+                question: "Unsur yang berada dalam satu golongan transisi ($B$) adalah $Q$ dan $R$, dengan $Q=[\\text{Ne}] 3s^2 3p^6$ dan $R=[\\text{Ar}] 4s^2 3d^{10} 4p^6$. (Benar / Salah)",
+                correctOptionIndex: 1,
                 options: [
-                    { text: "Benar", isCorrect: false, rationale: "Kedua unsur ($Q$ dan $R$) memiliki $8$ elektron valensi ($s+p$ terisi penuh), sehingga keduanya adalah Gas Mulia (Golongan VIIIA), bukan unsur transisi (Golongan B)." },
-                    { text: "Salah", isCorrect: true, rationale: "Kedua unsur adalah Gas Mulia (Golongan VIIIA). Unsur transisi yang segolongan adalah $P$ ($VIIIB$) dan $S$ ($VIIIB$)." }
-                ]
+                    { text: "Benar" },
+                    { text: "Salah" }
+                ],
+                rationale: "1. Unsur $Q$ dan $R$ memiliki konfigurasi kulit valensi penuh ($s^2 p^6$).<br>2. Unsur $Q$ ($Z=18$) dan $R$ ($Z=36$) keduanya adalah <strong>Gas Mulia</strong> (Golongan VIIIA), bukan unsur transisi (Golongan B).<br>Pernyataan ini <strong>Salah</strong>."
             },
             // 25. Notasi Unsur X dan Golongannya
             {
                 question: "Ion $\\text{X}^{2+}$ memiliki konfigurasi $2-8-8$. Jika unsur $X$ mempunyai 20 neutron, tuliskan notasi unsurnya dan golongannya.",
+                correctOptionIndex: 0,
                 options: [
-                    { text: "$^{40}_{20}\\text{X}$, Golongan IIA", isCorrect: true, rationale: "Elektron $\\text{X}^{2+}$ adalah $18$. Atom $X$ netral memiliki $18+2=20$ elektron ($Z=20$). $A=Z+n=20+20=40$. Konfigurasi $2-8-8-2$ ($e$ valensi $2$) $\\rightarrow$ Golongan IIA." },
-                    { text: "$^{38}_{20}\\text{X}$, Golongan IIA", isCorrect: false, rationale: "Nomor massa $A$ seharusnya $20+20=40$."},
-                    { text: "$^{40}_{20}\\text{X}$, Golongan VIIIA", isCorrect: false, rationale: "Elektron valensi $2$ berarti Golongan IIA."},
-                    { text: "$^{38}_{18}\\text{X}$, Golongan VIIIA", isCorrect: false, rationale: "Ini adalah notasi untuk Argon." }
-                ]
+                    { text: "$^{40}_{20}\\text{X}$, Golongan IIA" },
+                    { text: "$^{38}_{20}\\text{X}$, Golongan IIA" },
+                    { text: "$^{40}_{20}\\text{X}$, Golongan VIIIA" },
+                    { text: "$^{38}_{18}\\text{X}$, Golongan VIIIA" }
+                ],
+                rationale: "1. Elektron ion $\\text{X}^{2+}$: $2+8+8 = 18$ elektron.<br>2. Atom $X$ netral ($Z$): $18$ (e) $+ 2$ (kehilangan muatan) $= 20$ elektron. Maka <strong>$Z=20$</strong>.<br>3. Nomor massa $A = Z + n = 20 + 20 = 40$. Notasi: $\\mathbf{^{40}_{20}\\text{X}}$.<br>4. Konfigurasi $X$ netral ($2-8-8-2$) memiliki $e$ valensi $2 \\rightarrow$ <strong>Golongan IIA</strong>."
             },
             // 26. Golongan IIA (Benar-Salah)
             {
                 question: "Kelompok unsur pada golongan IIA diberi nama alkali tanah. (Benar / Salah)",
+                correctOptionIndex: 0,
                 options: [
-                    { text: "Benar", isCorrect: true, rationale: "Golongan IA dinamakan Alkali, Golongan IIA dinamakan Alkali Tanah." },
-                    { text: "Salah", isCorrect: false, rationale: "Pernyataan ini benar." }
-                ]
+                    { text: "Benar" },
+                    { text: "Salah" }
+                ],
+                rationale: "Pernyataan ini <strong>Benar</strong>. Golongan IA (kecuali $\\text{H}$) dinamakan logam alkali, dan Golongan IIA dinamakan logam <strong>Alkali Tanah</strong>."
             },
             // 27. Notasi Unsur R (Benar-Salah)
             {
                 question: "Ion $\\text{R}^{2-}$ memiliki konfigurasi $2-8-8$. Jika unsur $R$ memiliki $16$ neutron, maka notasi unsur $R$ adalah $^{32}_{16}\\text{R}$. (Benar / Salah)",
+                correctOptionIndex: 0,
                 options: [
-                    { text: "Benar", isCorrect: true, rationale: "Elektron $\\text{R}^{2-}$ adalah $18$. Atom $R$ netral memiliki $18-2=16$ elektron ($Z=16$). $A=Z+n=16+16=32$. Notasinya adalah $^{32}_{16}\\text{R}$ (Sulfur/Belerang)." },
-                    { text: "Salah", isCorrect: false, rationale: "Pernyataan ini benar." }
-                ]
+                    { text: "Benar" },
+                    { text: "Salah" }
+                ],
+                rationale: "1. Elektron ion $\\text{R}^{2-}$: $2+8+8 = 18$ elektron.<br>2. Atom $R$ netral ($Z$): $18$ (e) $- 2$ (kelebihan muatan) $= 16$ elektron. Maka <strong>$Z=16$</strong>.<br>3. Nomor massa $A = Z + n = 16 + 16 = 32$. Notasi: $\\mathbf{^{32}_{16}\\text{R}}$.<br>Pernyataan ini <strong>Benar</strong>."
             },
             // 28. Senyawa Mg2+ dan PO43-
             {
                 question: "Jika ion $\\text{Mg}^{2+}$ berikatan dengan ion $\\text{PO}_4^{3-}$, tuliskan rumus senyawa dan nama senyawanya.",
+                correctOptionIndex: 2,
                 options: [
-                    { text: "Rumus $\\text{Mg}_2(\\text{PO}_4)_3$, nama Magnesium Fosfat", isCorrect: false, rationale: "Rumus senyawa harus menyeimbangkan muatan: $3 \\times (2+) + 2 \\times (3-) = 0$."},
-                    { text: "Rumus $\\text{Mg}_3(\\text{PO}_4)_2$, nama Magnesium (II) Fosfat", isCorrect: false, rationale: "Magnesium adalah Golongan IIA, tidak perlu angka Romawi (II)."},
-                    { text: "Rumus $\\text{Mg}_3(\\text{PO}_4)_2$, nama Magnesium Fosfat", isCorrect: true, rationale: "Senyawa terbentuk dari pertukaran muatan menjadi $\\text{Mg}_3(\\text{PO}_4)_2$. Nama senyawanya adalah Magnesium Fosfat." },
-                    { text: "Rumus $\\text{MgPO}_4$, nama Magnesium Fosfat", isCorrect: false, rationale: "Muatan tidak seimbang: $2+ \\neq 3-$." }
-                ]
+                    { text: "Rumus $\\text{Mg}_2(\\text{PO}_4)_3$, nama Magnesium Fosfat" },
+                    { text: "Rumus $\\text{Mg}_3(\\text{PO}_4)_2$, nama Magnesium (II) Fosfat" },
+                    { text: "Rumus $\\text{Mg}_3(\\text{PO}_4)_2$, nama Magnesium Fosfat" },
+                    { text: "Rumus $\\text{MgPO}_4$, nama Magnesium Fosfat" }
+                ],
+                rationale: "1. Senyawa ion harus netral: Muatan $\\text{Mg}^{2+}$ dan $\\text{PO}_4^{3-}$ harus seimbang. KPK dari $2$ dan $3$ adalah $6$.<br>2. Rumus: $3 \\times \\text{Mg}^{2+} + 2 \\times \\text{PO}_4^{3-} \\rightarrow$ $\\mathbf{\\text{Mg}_3(\\text{PO}_4)_2}$.<br>3. Penamaan: Kation logam utama ($\\text{Mg}^{2+}$) <strong>tidak memerlukan angka Romawi</strong>. Nama: <strong>Magnesium Fosfat</strong>."
             },
             // 29. Senyawa Cr3+ dan OH- (Benar-Salah)
             {
                 question: "Ion $\\text{Cr}^{3+}$ berikatan dengan $\\text{OH}^{-}$ membentuk senyawa $\\text{Cr}(\\text{OH})_3$ yang dinamakan Kromium(III) hidroksida. (Benar / Salah)",
+                correctOptionIndex: 0,
                 options: [
-                    { text: "Benar", isCorrect: true, rationale: "Muatan $3+$ dan $1-$ menghasilkan $\\text{Cr}(\\text{OH})_3$. $\\text{Cr}$ adalah logam transisi dengan muatan $3+$ sehingga diberi nama Kromium(III) hidroksida." },
-                    { text: "Salah", isCorrect: false, rationale: "Pernyataan ini benar." }
-                ]
+                    { text: "Benar" },
+                    { text: "Salah" }
+                ],
+                rationale: "1. Rumus Senyawa: $\\text{Cr}^{3+}$ dan $\\text{OH}^{-}$ seimbang pada rasio $1:3$, menghasilkan $\\mathbf{\\text{Cr}(\\text{OH})_3}$.<br>2. Penamaan: $\\text{Cr}$ adalah logam transisi, sehingga muatannya ($3+$) <strong>harus dicantumkan dalam angka Romawi</strong>. Nama: <strong>Kromium(III) hidroksida</strong>. Pernyataan ini <strong>Benar</strong>."
             },
             // 30. Nama Senyawa Fe(NO3)2 (Benar-Salah)
             {
                 question: "Nama senyawa $\\text{Fe}(\\text{NO}_3)_2$ adalah Besi(II) nitrat. (Benar / Salah)",
+                correctOptionIndex: 0,
                 options: [
-                    { text: "Benar", isCorrect: true, rationale: "Karena $\\text{NO}_3$ bermuatan $1-$, maka $\\text{Fe}$ bermuatan $2+$. Logam transisi $\\text{Fe}^{2+}$ dinamakan Besi(II). Anion $\\text{NO}_3^-$ dinamakan nitrat." },
-                    { text: "Salah", isCorrect: false, rationale: "Pernyataan ini benar." }
-                ]
+                    { text: "Benar" },
+                    { text: "Salah" }
+                ],
+                rationale: "1. $\\text{NO}_3$ adalah ion nitrat ($1-$). Muatan total anion adalah $2 \\times (1-) = 2-$.<br>2. Maka $\\text{Fe}$ harus bermuatan $2+$. $\\text{Fe}^{2+}$ dinamakan <strong>Besi(II)</strong>.<br>3. Nama senyawanya <strong>Besi(II) nitrat</strong>. Pernyataan ini <strong>Benar</strong>."
             },
             // 31. Nama IUPAC Senyawa Reaksi Karbit
             {
                 question: "Pada reaksi $\\text{CaC}_2(s) + 2\\text{H}_2\\text{O}(\\ell) \\to \\text{Ca}(\\text{OH})_2 (aq) + \\text{C}_2\\text{H}_2(g)$, tuliskan Nama IUPAC senyawa yang dihasilkan.",
+                correctOptionIndex: 2,
                 options: [
-                    { text: "Kalsium hidroksida dan Etana", isCorrect: false, rationale: "$\\text{C}_2\\text{H}_2$ adalah Etuna (asetilena), bukan Etana ($\\text{C}_2\\text{H}_6$)." },
-                    { text: "Kalsium oksida dan Etuna", isCorrect: false, rationale: "Senyawa yang dihasilkan adalah $\\text{Ca}(\\text{OH})_2$ (Kalsium hidroksida)."},
-                    { text: "Kalsium hidroksida dan Etuna", isCorrect: true, rationale: "Senyawa ion $\\text{Ca}(\\text{OH})_2$ adalah Kalsium hidroksida. Senyawa organik $\\text{C}_2\\text{H}_2$ adalah Etuna." },
-                    { text: "Kalsium sulfat dan Metana", isCorrect: false, rationale: "Senyawa yang dihasilkan adalah $\\text{Ca}(\\text{OH})_2$ dan $\\text{C}_2\\text{H}_2$." }
-                ]
+                    { text: "Kalsium hidroksida dan Etana" },
+                    { text: "Kalsium oksida dan Etuna" },
+                    { text: "Kalsium hidroksida dan Etuna" },
+                    { text: "Kalsium sulfat dan Metana" }
+                ],
+                rationale: "Dua senyawa yang dihasilkan adalah $\\text{Ca}(\\text{OH})_2$ (senyawa ion) dan $\\text{C}_2\\text{H}_2$ (senyawa organik).<br>1. $\\mathbf{\\text{Ca}(\\text{OH})_2}$: <strong>Kalsium hidroksida</strong>.<br>2. $\\mathbf{\\text{C}_2\\text{H}_2}$: Hidrokarbon alkuna dengan 2 atom karbon. Nama IUPAC-nya adalah <strong>Etuna</strong> (nama umum: asetilena)."
             },
             // 32. Koefisien Reaksi Setara C8H18 (Benar-Salah)
             {
                 question: "Supaya reaksi $\\text{aC}_8\\text{H}_{18} + \\text{bO}_2 \\to \\text{cCO}_2 + \\text{dH}_2\\text{O}$ setara, maka koefisien $a, b, c, d$ berturut-turut adalah $2, 25, 16, 18$. (Benar / Salah)",
+                correctOptionIndex: 0,
                 options: [
-                    { text: "Benar", isCorrect: true, rationale: "Pengecekan: $\\text{C}$ ($2\\times 8 = 16$, $16\\times 1 = 16$), $\\text{H}$ ($2\\times 18 = 36$, $18\\times 2 = 36$), $\\text{O}$ ($25\\times 2 = 50$, $16\\times 2 + 18\\times 1 = 50$). Reaksi setara." },
-                    { text: "Salah", isCorrect: false, rationale: "Pernyataan ini benar." }
-                ]
+                    { text: "Benar" },
+                    { text: "Salah" }
+                ],
+                rationale: "Pengecekan Keseimbangan Atom dengan koefisien $a=2, b=25, c=16, d=18$:<br>$\\mathbf{\\text{C}}$: Kiri $2\\times 8 = 16$. Kanan $16\\times 1 = 16$. (Setara)<br>$\\mathbf{\\text{H}}$: Kiri $2\\times 18 = 36$. Kanan $18\\times 2 = 36$. (Setara)<br>$\\mathbf{\\text{O}}$: Kiri $25\\times 2 = 50$. Kanan $(16\\times 2) + (18\\times 1) = 32 + 18 = 50$. (Setara)<br>Reaksi setara. Pernyataan ini <strong>Benar</strong>."
             },
             // 33. Penyetaraan Reaksi Amonia
             {
                 question: "Persamaan reaksi kimia yang setara untuk penguraian gas amonia ($\\text{NH}_3$) menjadi gas nitrogen dan gas hidrogen adalah...",
+                correctOptionIndex: 1,
                 options: [
-                    { text: "$2\\text{NH}_3(g) \\to 2\\text{N}_2(g) + 3\\text{H}_2(g)$", isCorrect: false, rationale: "Koefisien $\\text{N}_2$ seharusnya $1$."},
-                    { text: "$2\\text{NH}_3(g) \\to \\text{N}_2(g) + 3\\text{H}_2(g)$", isCorrect: true, rationale: "Reaksi setara: $\\text{N}$ ($2=2$), $\\text{H}$ ($2\\times 3=6$, $3\\times 2=6$)." },
-                    { text: "$\\text{NH}_3(g) \\to \\text{N}_2(g) + \\text{H}_2(g)$", isCorrect: false, rationale: "Reaksi ini belum setara."},
-                    { text: "$2\\text{NH}_3(g) \\to \\text{N}_2(g) + 2\\text{H}_2(g)$", isCorrect: false, rationale: "Jumlah atom $\\text{H}$ belum setara." }
-                ]
+                    { text: "$2\\text{NH}_3(g) \\to 2\\text{N}_2(g) + 3\\text{H}_2(g)$" },
+                    { text: "$2\\text{NH}_3(g) \\to \\text{N}_2(g) + 3\\text{H}_2(g)$" },
+                    { text: "$\\text{NH}_3(g) \\to \\text{N}_2(g) + \\text{H}_2(g)$" },
+                    { text: "$2\\text{NH}_3(g) \\to \\text{N}_2(g) + 2\\text{H}_2(g)$" }
+                ],
+                rationale: "Reaksi: $a\\text{NH}_3(g) \\to b\\text{N}_2(g) + c\\text{H}_2(g)$.<br>Untuk menyetarakan: Koefisien $a=2, b=1, c=3$ digunakan untuk menyeimbangkan atom N dan H.<br>Persamaan setara: $\\mathbf{2\\text{NH}_3(g) \\to \\text{N}_2(g) + 3\\text{H}_2(g)}$."
             },
             // 34. Penyetaraan Reaksi Besi dan Klor
             {
                 question: "Tuliskan persamaan reaksi kimia yang benar (setara) untuk reaksi Besi ($\\text{Fe}$) dengan klor ($\\text{Cl}_2$) membentuk besi(III) klorida ($\\text{FeCl}_3$).",
+                correctOptionIndex: 2,
                 options: [
-                    { text: "$\\text{Fe}(s) + \\text{Cl}_2(g) \\to \\text{FeCl}_3(s)$", isCorrect: false, rationale: "Belum setara."},
-                    { text: "$\\text{Fe}(s) + 3\\text{Cl}_2(g) \\to 2\\text{FeCl}_3(s)$", isCorrect: false, rationale: "Atom $\\text{Fe}$ belum setara."},
-                    { text: "$2\\text{Fe}(s) + 3\\text{Cl}_2(g) \\to 2\\text{FeCl}_3(s)$", isCorrect: true, rationale: "Reaksi setara: $\\text{Fe}$ ($2=2$), $\\text{Cl}$ ($3\\times 2=6$, $2\\times 3=6$)." },
-                    { text: "$2\\text{Fe}(s) + 2\\text{Cl}_2(g) \\to 2\\text{FeCl}_3(s)$", isCorrect: false, rationale: "Atom $\\text{Cl}$ belum setara." }
-                ]
+                    { text: "$\\text{Fe}(s) + \\text{Cl}_2(g) \\to \\text{FeCl}_3(s)$" },
+                    { text: "$\\text{Fe}(s) + 3\\text{Cl}_2(g) \\to 2\\text{FeCl}_3(s)$" },
+                    { text: "$2\\text{Fe}(s) + 3\\text{Cl}_2(g) \\to 2\\text{FeCl}_3(s)$" },
+                    { text: "$2\\text{Fe}(s) + 2\\text{Cl}_2(g) \\to 2\\text{FeCl}_3(s)$" }
+                ],
+                rationale: "Reaksi: $\\text{Fe} + \\text{Cl}_2 \\to \\text{FeCl}_3$.<br>1. Setarakan $\\text{Cl}$: KPK dari $2$ dan $3$ adalah $6$. Gunakan $3\\text{Cl}_2$ dan $2\\text{FeCl}_3$.<br>2. Setarakan $\\text{Fe}$: Koefisien $2$ di kanan, maka koefisien $2$ di kiri.<br>Persamaan setara: $\\mathbf{2\\text{Fe}(s) + 3\\text{Cl}_2(g) \\to 2\\text{FeCl}_3(s)}$."
             },
             // 35. Persamaan Reaksi MgO dan H2SO4
             {
                 question: "Tuliskan persamaan reaksi kimia untuk padatan magnesium oksida ($\\text{MgO}$) dengan larutan asam sulfat ($\\text{H}_2\\text{SO}_4$) menghasilkan magnesium sulfat dan air.",
+                correctOptionIndex: 1,
                 options: [
-                    { text: "$\\text{Mg}(\\text{OH})_2(s) + \\text{H}_2\\text{SO}_4(aq) \\to \\text{MgSO}_4(aq) + 2\\text{H}_2\\text{O}(\\ell)$", isCorrect: false, rationale: "Reaktan seharusnya $\\text{MgO}$, bukan $\\text{Mg}(\\text{OH})_2$."},
-                    { text: "$\\text{MgO}(s) + \\text{H}_2\\text{SO}_4(aq) \\to \\text{MgSO}_4(aq) + \\text{H}_2\\text{O}(\\ell)$", isCorrect: true, rationale: "Reaksi asam-basa menghasilkan garam $\\text{MgSO}_4$ dan air $\\text{H}_2\\text{O}$. Reaksi ini sudah setara." },
-                    { text: "$\\text{Mg}(s) + \\text{H}_2\\text{SO}_4(aq) \\to \\text{MgSO}_4(aq) + \\text{H}_2(g)$", isCorrect: false, rationale: "Reaktan seharusnya $\\text{MgO}$ (oksida), bukan $\\text{Mg}$ (logam)."},
-                    { text: "$\\text{Mg}_2\\text{O}(s) + \\text{H}_2\\text{SO}_4(aq) \\to \\text{MgSO}_4(aq) + \\text{H}_2\\text{O}(\\ell)$", isCorrect: false, rationale: "Rumus magnesium oksida adalah $\\text{MgO}$." }
-                ]
+                    { text: "$\\text{Mg}(\\text{OH})_2(s) + \\text{H}_2\\text{SO}_4(aq) \\to \\text{MgSO}_4(aq) + 2\\text{H}_2\\text{O}(\\ell)$" },
+                    { text: "$\\text{MgO}(s) + \\text{H}_2\\text{SO}_4(aq) \\to \\text{MgSO}_4(aq) + \\text{H}_2\\text{O}(\\ell)$" },
+                    { text: "$\\text{Mg}(s) + \\text{H}_2\\text{SO}_4(aq) \\to \\text{MgSO}_4(aq) + \\text{H}_2(g)$" },
+                    { text: "$\\text{Mg}_2\\text{O}(s) + \\text{H}_2\\text{SO}_4(aq) \\to \\text{MgSO}_4(aq) + \\text{H}_2\\text{O}(\\ell)$" }
+                ],
+                rationale: "Reaksi yang terjadi adalah reaksi asam-basa antara oksida basa ($\\mathbf{\\text{MgO}}$) dan asam kuat ($\\mathbf{\\text{H}_2\\text{SO}_4}$), menghasilkan garam ($\\mathbf{\\text{MgSO}_4}$) dan air ($\\mathbf{\\text{H}_2\\text{O}}$).<br>Persamaan yang setara: $\\text{MgO}(s) + \\text{H}_2\\text{SO}_4(aq) \\to \\text{MgSO}_4(aq) + \\text{H}_2\\text{O}(\\ell)$."
             }
         ];
 
@@ -611,7 +681,7 @@
             // 1. Calculate Score
             quizData.forEach((qData, qIndex) => {
                 const selectedIndex = userAnswers[qIndex];
-                if (selectedIndex !== null && qData.options[selectedIndex].isCorrect) {
+                if (selectedIndex !== null && selectedIndex === qData.correctOptionIndex) {
                     correctCount++;
                 }
             });
@@ -631,16 +701,17 @@
 
             quizData.forEach((qData, qIndex) => {
                 const selectedIndex = userAnswers[qIndex];
+                const isCorrect = selectedIndex !== null && selectedIndex === qData.correctOptionIndex;
                 const qDetailElement = document.createElement('div');
                 qDetailElement.className = 'p-5 rounded-lg shadow-md border-2 ' + (
-                    selectedIndex !== null && qData.options[selectedIndex].isCorrect ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50'
+                    isCorrect ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50'
                 );
                 
                 // Question Header
                 qDetailElement.innerHTML = `
                     <p class="text-xl font-bold text-gray-800 mb-2">Soal ${qIndex + 1} 
-                        <span class="ml-2 px-3 py-1 text-sm rounded-full font-semibold ${selectedIndex !== null && qData.options[selectedIndex].isCorrect ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}">
-                            ${selectedIndex !== null && qData.options[selectedIndex].isCorrect ? 'BENAR' : 'SALAH'}
+                        <span class="ml-2 px-3 py-1 text-sm rounded-full font-semibold ${isCorrect ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}">
+                            ${isCorrect ? 'BENAR' : 'SALAH'}
                         </span>
                     </p>
                     <p class="text-md text-gray-700 mb-4">${qData.question}</p>
@@ -651,12 +722,12 @@
                 optionsList.className = 'space-y-3 mb-4';
                 qData.options.forEach((option, oIndex) => {
                     const isSelected = oIndex === selectedIndex;
-                    const isCorrect = option.isCorrect;
+                    const isCorrectOption = oIndex === qData.correctOptionIndex;
                     
                     let className = 'p-3 border rounded-lg disabled ';
-                    if (isCorrect) {
+                    if (isCorrectOption) {
                         className += 'correct-answer font-bold';
-                    } else if (isSelected && !isCorrect) {
+                    } else if (isSelected && !isCorrectOption) {
                         className += 'incorrect-answer selected-answer';
                     } else {
                         className += 'border-gray-300 bg-white';
@@ -665,21 +736,19 @@
                     optionsList.innerHTML += `
                         <div class="${className}">
                             <span class="font-medium">${String.fromCharCode(65 + oIndex)}.</span> ${option.text}
-                            ${isSelected ? '<span class="ml-2 text-xs font-semibold">(Jawabanmu)</span>' : ''}
-                            ${isCorrect && !isSelected ? '<span class="ml-2 text-xs font-semibold">(Jawaban Benar)</span>' : ''}
+                            ${isSelected && !isCorrectOption ? '<span class="ml-2 text-xs font-semibold">(Jawabanmu)</span>' : ''}
+                            ${isCorrectOption ? '<span class="ml-2 text-xs font-semibold">(Jawaban Benar)</span>' : ''}
                         </div>
                     `;
                 });
                 qDetailElement.appendChild(optionsList);
 
-                // Rationale/Pembahasan
-                const correctOption = qData.options.find(opt => opt.isCorrect);
-                if (correctOption) {
-                    const rationaleBox = document.createElement('div');
-                    rationaleBox.className = 'rationale-box p-4 rounded-lg text-gray-700 text-sm';
-                    rationaleBox.innerHTML = `<p class="font-semibold text-indigo-800 mb-1">Pembahasan:</p><p>${correctOption.rationale}</p>`;
-                    qDetailElement.appendChild(rationaleBox);
-                }
+                // Rationale/Pembahasan (Accessing the single rationale)
+                const rationaleBox = document.createElement('div');
+                rationaleBox.className = 'rationale-box p-4 rounded-lg text-gray-700 text-sm';
+                // Using innerHTML to correctly interpret <strong> and <br> tags
+                rationaleBox.innerHTML = `<p class="font-semibold text-indigo-800 mb-1">Pembahasan:</p><p>${qData.rationale}</p>`;
+                qDetailElement.appendChild(rationaleBox);
 
                 detailsContainer.appendChild(qDetailElement);
             });
