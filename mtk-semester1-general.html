@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rangkuman Materi PAS Matematika Kelas X (Lengkap)</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- KaTeX for Math Formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        .math-container {
+            overflow-x: auto;
+            padding: 1rem 0;
+        }
+        canvas.graph-canvas {
+            border: 1px solid #e5e7eb;
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            display: block;
+            margin: 0 auto;
+        }
+        .section-card {
+            transition: all 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .formula-box {
+            background-color: #f8fafc;
+            border-left: 4px solid #6366f1;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.25rem;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+
+    <!-- Navigation -->
+    <nav class="bg-indigo-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold">Rangkuman PAS MTK X</h1>
+            <div class="hidden md:flex space-x-4 text-sm">
+                <a href="#bab1" class="hover:text-indigo-200 transition">Bab 1: Pangkat & Akar</a>
+                <a href="#bab2" class="hover:text-indigo-200 transition">Bab 2: Eksponen</a>
+                <a href="#bab3" class="hover:text-indigo-200 transition">Bab 3: Kuadrat</a>
+                <a href="#bab4" class="hover:text-indigo-200 transition">Bab 4: SPtLDV</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8 max-w-5xl">
+        
+        <!-- Intro & Distribution -->
+        <section class="mb-12 grid md:grid-cols-2 gap-8 items-center bg-white p-6 rounded-xl shadow-sm">
+            <div>
+                <h2 class="text-3xl font-bold text-indigo-700 mb-4">Persiapan Penilaian Akhir Semester</h2>
+                <p class="text-gray-600 mb-4">
+                    Rangkuman lengkap mencakup Eksponen, Bentuk Akar, Persamaan Kuadrat (termasuk rumus ABC & Vieta), serta SPtLDV.
+                </p>
+                <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                    <h3 class="font-semibold text-blue-700">Update Materi:</h3>
+                    <ul class="list-disc list-inside text-sm text-blue-800 mt-2">
+                        <li>Sifat Operasi Bentuk Akar & Merasionalkan.</li>
+                        <li>Rumus ABC, Melengkapi Kuadrat, & Teorema Vieta.</li>
+                        <li>Cara menyusun fungsi kuadrat dari titik puncak/potong.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="flex flex-col items-center">
+                <h3 class="text-sm font-semibold text-gray-500 mb-2">Komposisi Soal (Total 40 Soal)</h3>
+                <div class="w-64 h-64">
+                    <canvas id="examChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAB 1 -->
+        <section id="bab1" class="mb-12 section-card bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+            <div class="flex items-center gap-3 mb-6 border-b pb-4">
+                <span class="bg-indigo-100 text-indigo-700 font-bold px-3 py-1 rounded">Bab 1</span>
+                <h2 class="text-2xl font-bold text-slate-800">Perpangkatan & Bentuk Akar</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Kolom Kiri: Eksponen -->
+                <div>
+                    <h3 class="text-lg font-semibold text-indigo-600 mb-3">A. Sifat Bilangan Berpangkat</h3>
+                    <div class="formula-box text-sm">
+                        <strong>Operasi Dasar:</strong>
+                        $$a^m \cdot a^n = a^{m+n}$$
+                        $$\frac{a^m}{a^n} = a^{m-n}$$
+                        $$(a^m)^n = a^{m \cdot n}$$
+                        $$(a \cdot b)^n = a^n \cdot b^n$$
+                        $$\left(\frac{a}{b}\right)^n = \frac{a^n}{b^n}$$
+                    </div>
+                    <div class="bg-yellow-50 p-3 rounded border border-yellow-200 text-sm">
+                        <strong>Pangkat Tak Sebenarnya:</strong>
+                        <ul class="list-disc list-inside mt-1 space-y-1">
+                            <li>Pangkat Nol: $$a^0 = 1, (a \neq 0)$$</li>
+                            <li>Pangkat Negatif: $$a^{-n} = \frac{1}{a^n}$$</li>
+                            <li>Pangkat Pecahan: $$a^{\frac{m}{n}} = \sqrt[n]{a^m}$$</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Kolom Kanan: Bentuk Akar -->
+                <div>
+                    <h3 class="text-lg font-semibold text-indigo-600 mb-3">B. Sifat Bentuk Akar</h3>
+                    <div class="formula-box text-sm">
+                        <strong>Operasi Aljabar Akar:</strong>
+                        <ul class="list-none space-y-2 mt-2">
+                            <li>$$a\sqrt{c} \pm b\sqrt{c} = (a \pm b)\sqrt{c}$$ (Penjumlahan/Pengurangan)</li>
+                            <li>$$\sqrt{a} \cdot \sqrt{b} = \sqrt{a \cdot b}$$ (Perkalian)</li>
+                            <li>$$\frac{\sqrt{a}}{\sqrt{b}} = \sqrt{\frac{a}{b}}$$ (Pembagian)</li>
+                        </ul>
+                    </div>
+                    
+                    <h4 class="font-semibold text-sm text-gray-700 mt-4">Merasionalkan Penyebut</h4>
+                    <div class="overflow-x-auto text-sm mt-2 border p-2 rounded bg-slate-50">
+                        <table class="w-full">
+                            <tr>
+                                <td class="py-1">Bentuk $$\frac{a}{\sqrt{b}}$$</td>
+                                <td class="py-1">$$\to \text{kali } \frac{\sqrt{b}}{\sqrt{b}}$$</td>
+                            </tr>
+                            <tr>
+                                <td class="py-1">Bentuk $$\frac{c}{a + \sqrt{b}}$$</td>
+                                <td class="py-1">$$\to \text{kali } \frac{a - \sqrt{b}}{a - \sqrt{b}}$$ (Sekawan)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAB 2 -->
+        <section id="bab2" class="mb-12 section-card bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+            <div class="flex items-center gap-3 mb-6 border-b pb-4">
+                <span class="bg-purple-100 text-purple-700 font-bold px-3 py-1 rounded">Bab 2</span>
+                <h2 class="text-2xl font-bold text-slate-800">Persamaan & Fungsi Eksponensial</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-purple-600 mb-3">Persamaan Eksponen</h3>
+                    <p class="mb-2 text-sm">Prinsip utama: Samakan basis kiri dan kanan.</p>
+                    <div class="bg-purple-50 p-3 rounded-lg border border-purple-100 mb-4 text-sm">
+                        $$a^{f(x)} = a^{g(x)} \implies f(x) = g(x)$$
+                    </div>
+                    
+                    <h3 class="text-lg font-semibold text-purple-600 mb-3">Fungsi Eksponensial</h3>
+                    <p class="text-sm">Bentuk: $$f(x) = k \cdot a^x$$</p>
+                    <ul class="list-disc list-inside text-sm mt-2 text-gray-700">
+                        <li>$$a > 1$$ : Monoton Naik (Pertumbuhan)</li>
+                        <li>$$0 < a < 1$$ : Monoton Turun (Peluruhan)</li>
+                        <li>Titik potong sumbu Y selalu di $$(0, k)$$</li>
+                        <li>Asimtot datar: Sumbu X ($$y=0$$)</li>
+                    </ul>
+                </div>
+                <div>
+                    <canvas id="canvasExponen" class="graph-canvas"></canvas>
+                    <div class="text-center text-xs text-gray-500 mt-2">
+                        <span class="text-blue-600 font-bold">― y = 2^x (Naik)</span> &nbsp;|&nbsp; 
+                        <span class="text-red-600 font-bold">― y = (0.5)^x (Turun)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAB 3 -->
+        <section id="bab3" class="mb-12 section-card bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+            <div class="flex items-center gap-3 mb-6 border-b pb-4">
+                <span class="bg-green-100 text-green-700 font-bold px-3 py-1 rounded">Bab 3</span>
+                <h2 class="text-2xl font-bold text-slate-800">Persamaan & Fungsi Kuadrat</h2>
+            </div>
+
+            <!-- Bagian 1: Mencari Akar -->
+            <div class="mb-8 border-b pb-6">
+                <h3 class="text-lg font-semibold text-green-700 mb-4">A. Menentukan Akar-Akar ($$ax^2 + bx + c = 0$$)</h3>
+                <div class="grid md:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-green-50 p-3 rounded border">
+                        <strong>1. Pemfaktoran</strong>
+                        <p>Mencari dua angka yang dijumlahkan hasilnya $$b$$ dan dikalikan hasilnya $$ac$$.</p>
+                        $$(x - x_1)(x - x_2) = 0$$
+                    </div>
+                    <div class="bg-green-50 p-3 rounded border">
+                        <strong>2. Melengkapi Kuadrat Sempurna</strong>
+                        <p>Mengubah persamaan menjadi bentuk $$(x+p)^2 = q$$.</p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded border border-green-300">
+                        <strong>3. Rumus ABC (Pamungkas)</strong>
+                        $$x_{1,2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bagian 2: Sifat Akar & Menyusun Persamaan -->
+            <div class="grid md:grid-cols-2 gap-8 mb-8 border-b pb-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-green-700 mb-3">B. Operasi Akar (Teorema Vieta)</h3>
+                    <div class="formula-box text-sm">
+                        Jika $$x_1$$ dan $$x_2$$ adalah akar-akar, maka:
+                        <ul class="list-disc list-inside mt-2 space-y-2">
+                            <li><strong>Jumlah Akar:</strong> $$x_1 + x_2 = -\frac{b}{a}$$</li>
+                            <li><strong>Hasil Kali Akar:</strong> $$x_1 \cdot x_2 = \frac{c}{a}$$</li>
+                            <li><strong>Selisih Akar:</strong> $$|x_1 - x_2| = \frac{\sqrt{D}}{a}$$</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-green-700 mb-3">C. Menyusun Persamaan Kuadrat Baru</h3>
+                    <p class="text-sm mb-2">Jika diketahui akar-akar baru $$x_1$$ dan $$x_2$$:</p>
+                    <div class="bg-slate-800 text-white p-4 rounded text-center text-lg">
+                        $$x^2 - (x_1 + x_2)x + (x_1 \cdot x_2) = 0$$
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2 text-center">"x kuadrat dikurang Jumlah x ditambah Kali sama dengan nol"</p>
+                </div>
+            </div>
+
+            <!-- Bagian 3: Fungsi Kuadrat -->
+            <div>
+                <h3 class="text-lg font-semibold text-green-700 mb-4">D. Menyusun Fungsi Kuadrat ($$y = ax^2 + bx + c$$)</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <div class="mermaid">
+                            flowchart TD
+                                Start((Mulai)) --> Q{Apa yang diketahui?}
+                                Q -- Titik Puncak<br>(xp, yp) --> R[Gunakan Rumus:<br>y = a(x - xp)^2 + yp]
+                                Q -- Titik Potong sb-X<br>(x1,0) dan (x2,0) --> S[Gunakan Rumus:<br>y = a(x - x1)(x - x2)]
+                                Q -- Tiga Titik<br>Sembarang --> T[Substitusi ke<br>y = ax^2 + bx + c<br>(Eliminasi SPLTV)]
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-semibold text-sm mb-2">Contoh Grafik & Unsur:</h4>
+                            <canvas id="canvasKuadrat" class="graph-canvas" style="height: 200px;"></canvas>
+                        </div>
+                        <div class="mt-4 bg-slate-50 p-3 rounded text-sm">
+                            <strong>Analisis Diskriminan ($$D = b^2 - 4ac$$):</strong>
+                            <ul class="list-disc list-inside text-xs mt-1 text-gray-600">
+                                <li>$$D > 0$$: Memotong sumbu X di 2 titik.</li>
+                                <li>$$D = 0$$: Menyinggung sumbu X.</li>
+                                <li>$$D < 0$$: Tidak memotong sumbu X (Definit).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAB 4 -->
+        <section id="bab4" class="mb-12 section-card bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+            <div class="flex items-center gap-3 mb-6 border-b pb-4">
+                <span class="bg-orange-100 text-orange-700 font-bold px-3 py-1 rounded">Bab 4</span>
+                <h2 class="text-2xl font-bold text-slate-800">Sistem Pertidaksamaan Linear (SPtLDV)</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-orange-600 mb-3">Langkah Menentukan DHP</h3>
+                    <ol class="list-decimal list-inside space-y-2 text-sm text-gray-700">
+                        <li><strong>Gambar Garis Pembatas:</strong> Tentukan titik potong sumbu X ($$y=0$$) dan Y ($$x=0$$).
+                            <ul class="list-disc list-inside ml-4 text-gray-500 text-xs">
+                                <li>Garis Utuh: $$\leq, \geq$$</li>
+                                <li>Garis Putus: $$<, >$$</li>
+                            </ul>
+                        </li>
+                        <li><strong>Uji Titik:</strong> Cek titik $$(0,0)$$. Jika benar, arsir ke arah titik tersebut.</li>
+                        <li><strong>Daerah Bersih vs Kotor:</strong> Tips: Arsir daerah yang SALAH agar DHP adalah daerah yang bersih (tanpa arsiran) untuk sistem yang kompleks.</li>
+                    </ol>
+
+                    <h3 class="text-lg font-semibold text-orange-600 mt-6 mb-3">Nilai Optimum (Program Linear)</h3>
+                    <div class="bg-orange-50 p-3 rounded border text-sm">
+                        <p class="font-bold">Langkah:</p>
+                        <ol class="list-decimal list-inside">
+                            <li>Tentukan DHP.</li>
+                            <li>Tentukan koordinat <strong>Titik Pojok</strong> DHP.</li>
+                            <li>Substitusi titik pojok ke Fungsi Objektif $$f(x,y) = ax + by$$.</li>
+                            <li>Pilih nilai terbesar (Maks) atau terkecil (Min).</li>
+                        </ol>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-center font-semibold text-gray-600 mb-2">Contoh DHP: $$2x + y \leq 6$$</h4>
+                    <canvas id="canvasSptldv" class="graph-canvas"></canvas>
+                    <div class="text-center text-xs text-gray-500 mt-2">
+                        Area Hijau = Daerah Penyelesaian
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 py-6 text-center text-sm">
+        <p>Rangkuman Matematika Kelas X - Edisi Revisi Lengkap</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // 1. Initialize KaTeX
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ],
+                throwOnError : false
+            });
+
+            // 2. Initialize Mermaid
+            mermaid.initialize({ startOnLoad: true, theme: 'neutral', securityLevel: 'loose' });
+
+            // 3. Initialize Chart.js
+            const ctx = document.getElementById('examChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Bab 1: Pangkat/Akar', 'Bab 2: Eksponen', 'Bab 3: Kuadrat', 'Bab 4: SPtLDV'],
+                    datasets: [{
+                        data: [10, 10, 10, 10],
+                        backgroundColor: ['#6366f1', '#a855f7', '#22c55e', '#f97316'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+
+            // 4. Initialize Canvases
+            drawExponen();
+            drawKuadrat();
+            drawSptldv();
+        });
+
+        // --- DRAWING FUNCTIONS ---
+
+        function drawGrid(ctx, width, height, scale) {
+            ctx.strokeStyle = '#e5e7eb';
+            ctx.lineWidth = 1;
+            for(let x = 0; x <= width; x += scale) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke();
+            }
+            for(let y = 0; y <= height; y += scale) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke();
+            }
+            const cx = width / 2;
+            const cy = height / 2;
+            ctx.strokeStyle = '#374151';
+            ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(width, cy); ctx.stroke(); 
+            ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, height); ctx.stroke();
+        }
+
+        function drawExponen() {
+            const canvas = document.getElementById('canvasExponen');
+            if(!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = canvas.offsetWidth;
+            const height = canvas.height = canvas.offsetHeight;
+            const cx = width / 2;
+            const cy = height / 2;
+            const scale = 20;
+
+            drawGrid(ctx, width, height, scale);
+
+            // y = 2^x
+            ctx.beginPath(); ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 2;
+            for (let x = -10; x <= 10; x += 0.1) {
+                const y = Math.pow(2, x);
+                const plotX = cx + x * scale;
+                const plotY = cy - y * scale;
+                if (x === -10) ctx.moveTo(plotX, plotY); else ctx.lineTo(plotX, plotY);
+            }
+            ctx.stroke();
+
+            // y = (0.5)^x
+            ctx.beginPath(); ctx.strokeStyle = '#dc2626'; ctx.lineWidth = 2;
+            for (let x = -10; x <= 10; x += 0.1) {
+                const y = Math.pow(0.5, x);
+                const plotX = cx + x * scale;
+                const plotY = cy - y * scale;
+                if (x === -10) ctx.moveTo(plotX, plotY); else ctx.lineTo(plotX, plotY);
+            }
+            ctx.stroke();
+        }
+
+        function drawKuadrat() {
+            const canvas = document.getElementById('canvasKuadrat');
+            if(!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = canvas.offsetWidth;
+            const height = canvas.height = canvas.offsetHeight;
+            const cx = width / 2;
+            const cy = height / 2;
+            const scale = 15; // Smaller scale to fit more
+
+            drawGrid(ctx, width, height, scale);
+
+            // y = x^2 - 4x - 5
+            ctx.beginPath(); ctx.strokeStyle = '#334155'; ctx.lineWidth = 2;
+            for (let x = -5; x <= 8; x += 0.1) {
+                const y = (x * x) - (4 * x) - 5;
+                const plotX = cx + x * scale;
+                const plotY = cy - 20 - y * scale; 
+                if (x === -5) ctx.moveTo(plotX, plotY); else ctx.lineTo(plotX, plotY);
+            }
+            ctx.stroke();
+
+            // Points
+            const originY = cy - 20;
+            ctx.fillStyle = '#dc2626'; ctx.beginPath(); ctx.arc(cx + 2*scale, originY - (-9)*scale, 3, 0, Math.PI*2); ctx.fill(); // Peak
+            ctx.fillStyle = '#2563eb'; 
+            ctx.beginPath(); ctx.arc(cx - 1*scale, originY, 3, 0, Math.PI*2); ctx.fill(); // Root 1
+            ctx.beginPath(); ctx.arc(cx + 5*scale, originY, 3, 0, Math.PI*2); ctx.fill(); // Root 2
+        }
+
+        function drawSptldv() {
+            const canvas = document.getElementById('canvasSptldv');
+            if(!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = canvas.offsetWidth;
+            const height = canvas.height = canvas.offsetHeight;
+            const cx = 40; 
+            const cy = height - 40;
+            const scale = 30;
+
+            ctx.strokeStyle = '#374151'; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(20, cy); ctx.lineTo(width, cy); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(cx, 20); ctx.lineTo(cx, height); ctx.stroke();
+
+            const x2 = 3, y1 = 6;
+            const px2 = cx + x2 * scale;
+            const py1 = cy - y1 * scale;
+
+            ctx.fillStyle = 'rgba(34, 197, 94, 0.2)';
+            ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx, py1); ctx.lineTo(px2, cy); ctx.closePath(); ctx.fill();
+
+            ctx.strokeStyle = '#ea580c'; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(cx, py1); ctx.lineTo(px2, cy); ctx.stroke();
+            
+            ctx.fillStyle = '#000'; ctx.font = '12px sans-serif';
+            ctx.fillText("6", cx - 15, py1 + 5);
+            ctx.fillText("3", px2 - 5, cy + 20);
+        }
+    </script>
+</body>
+</html>
