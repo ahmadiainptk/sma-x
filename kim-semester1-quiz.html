@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Asas Kimia Kelas X</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font for better look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- LaTeX Rendering Library (KaTeX) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    
+    <style>
+        /* Custom styling */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .answer-option {
+            transition: all 0.15s;
+            cursor: pointer;
+        }
+        .answer-option:hover:not(.disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+        .disabled {
+            pointer-events: none;
+        }
+        /* Status styles for results */
+        .correct-answer {
+            background-color: #d1fae5 !important; /* Green 100 */
+            border-color: #059669 !important; /* Green 600 */
+        }
+        .incorrect-answer {
+            background-color: #fee2e2 !important; /* Red 100 */
+            border-color: #dc2626 !important; /* Red 600 */
+        }
+        .selected-answer {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        /* KaTeX inline/display adjustment */
+        .katex-display {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 8px 0;
+            text-align: left !important;
+        }
+        .rationale-box {
+            border-left: 4px solid #4f46e5;
+            background-color: #f0f4ff;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-4 sm:p-8">
+
+    <div id="main-container" class="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-6 sm:p-10 mb-10">
+
+        <header class="text-center mb-8 border-b pb-4">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-indigo-700">Quiz Asas Kimia Kelas X (35 Soal)</h1>
+            <p id="timer-display" class="text-xl font-mono text-gray-600 mt-2 hidden">Waktu: <span id="timer-value">00:00</span></p>
+        </header>
+
+        <!-- 1. WELCOME SCREEN -->
+        <div id="welcome-screen">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Petunjuk Pengerjaan Soal</h2>
+            <ul class="list-disc list-inside space-y-3 text-gray-700 mb-8 p-4 bg-indigo-50 rounded-lg">
+                <li>Klik tombol **Mulai Mengerjakan Soal** untuk memulai kuis.</li>
+                <li>Timer pengerjaan akan dimulai dari **0 detik** dan terus berjalan. Tidak ada batasan waktu.</li>
+                <li>Semua **35 soal** akan ditampilkan pada satu halaman.</li>
+                <li>Pilih semua jawabanmu, lalu klik tombol **Kirim Jawaban** di bagian bawah.</li>
+                <li>Setelah kirim, kamu akan melihat hasil, skor (1-100%), serta pembahasan untuk setiap soal.</li>
+            </ul>
+
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <button onclick="showMaterialModal()" class="px-8 py-3 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition-colors shadow-md">
+                    Ringkasan Materi
+                </button>
+                <button onclick="startQuiz()" class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-lg">
+                    Mulai Mengerjakan Soal
+                </button>
+            </div>
+        </div>
+        
+        <!-- 2. QUIZ SCREEN (Hidden initially) -->
+        <div id="quiz-screen" class="hidden">
+            <form id="quiz-form" onsubmit="event.preventDefault(); submitQuiz();">
+                <div id="questions-container" class="space-y-8">
+                    <!-- Questions will be dynamically loaded here -->
+                </div>
+
+                <div class="mt-10 pt-6 border-t border-gray-200 text-center">
+                    <button id="submit-button" type="submit" class="w-full sm:w-auto px-10 py-3 bg-green-600 text-white font-bold text-lg rounded-lg hover:bg-green-700 transition-colors shadow-xl">
+                        Kirim Jawaban
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 3. RESULTS SCREEN (Hidden initially) -->
+        <div id="results-screen" class="hidden">
+            <h2 class="text-3xl font-bold text-center text-indigo-700 mb-6">Hasil Pengerjaan Kuis</h2>
+            
+            <!-- Summary Box -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 text-center">
+                <div class="p-4 bg-indigo-100 rounded-lg shadow-md">
+                    <p class="text-sm text-indigo-700 font-medium">Skor</p>
+                    <p id="result-score" class="text-4xl font-extrabold text-indigo-800 mt-1">0%</p>
+                </div>
+                <div class="p-4 bg-green-100 rounded-lg shadow-md">
+                    <p class="text-sm text-green-700 font-medium">Jawaban Benar</p>
+                    <p id="result-correct" class="text-4xl font-extrabold text-green-800 mt-1">0</p>
+                </div>
+                <div class="p-4 bg-red-100 rounded-lg shadow-md">
+                    <p class="text-sm text-red-700 font-medium">Jawaban Salah</p>
+                    <p id="result-incorrect" class="text-4xl font-extrabold text-red-800 mt-1">0</p>
+                </div>
+            </div>
+            
+            <p class="text-center text-gray-600 mb-6">Waktu pengerjaan: <span id="result-time" class="font-bold text-indigo-600">00:00</span></p>
+
+            <h3 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Pembahasan Soal</h3>
+            <div id="results-details-container" class="space-y-8">
+                <!-- Detailed results and rationales will be loaded here -->
+            </div>
+
+            <div class="mt-10 pt-6 border-t border-gray-200 text-center">
+                <button onclick="window.location.reload()" class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg">
+                    Ulangi Kuis
+                </button>
+            </div>
+        </div>
+
+    </div>
+    
+    <!-- Notifikasi/Modal untuk Ringkasan Materi -->
+    <div id="material-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 hidden">
+        <div id="modal-content" class="bg-white rounded-xl shadow-3xl max-w-sm w-full p-8 transform transition-all duration-300">
+            <h2 class="text-xl font-bold text-indigo-700 mb-4">Informasi Materi</h2>
+            <p class="text-gray-700 mb-6">Ringkasan materi akan dibuat di halaman terpisah. Silakan lanjutkan dengan kuis!</p>
+            <button onclick="hideMaterialModal()" class="w-full px-6 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700">
+                Tutup
+            </button>
+        </div>
+    </div>
+
+
+    <!-- KaTeX Scripts must load before the main script -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    
+
+    <script>
+        // --- QUIZ DATA (35 Soal) ---
+        const quizData = [
+            // 1. Partikel Dasar
+            {
+                question: "Manakah yang merupakan 3 partikel dasar penyusun atom?",
+                options: [
+                    { text: "Neutron, Deuteron, dan Triton", isCorrect: false, rationale: "Deuteron dan Triton bukan partikel dasar atom, melainkan isotop hidrogen." },
+                    { text: "Quark, Lepton, dan Foton", isCorrect: false, rationale: "Ini adalah partikel sub-atomik yang lebih mendasar, tetapi Proton dan Neutron adalah partikel dasar penyusun inti atom." },
+                    { text: "Proton, Elektron, dan Neutron", isCorrect: true, rationale: "Proton dan Neutron membentuk inti atom, sedangkan Elektron mengelilingi inti." },
+                    { text: "Kation, Anion, dan Ion", isCorrect: false, rationale: "Ini adalah bentuk atom yang bermuatan listrik." }
+                ]
+            },
+            // 2. Partikel Unsur Fe
+            {
+                question: "Tentukan jumlah proton ($p$), elektron ($e$), dan neutron ($n$) pada unsur $^{56}_{26}\\text{Fe}$.",
+                options: [
+                    { text: "$p=26, e=26, n=56$", isCorrect: false, rationale: "Jumlah neutron adalah Nomor Massa dikurangi Nomor Atom ($56-26=30$)."},
+                    { text: "$p=56, e=56, n=30$", isCorrect: false, rationale: "Nomor atom ($26$) adalah jumlah proton dan elektron, bukan $56$."},
+                    { text: "$p=26, e=26, n=30$", isCorrect: true, rationale: "Nomor Atom ($Z=26$) adalah $p$ dan $e$. Neutron adalah $A-Z=56-26=30$." },
+                    { text: "$p=30, e=30, n=26$", isCorrect: false, rationale: "Nomor Atom ($Z$) adalah $26$, bukan $30$." }
+                ]
+            },
+            // 3. Nomor Massa Atom X
+            {
+                question: "Suatu atom netral mempunyai 3 kulit atom dan 7 elektron valensi. Jika dalam intinya terdapat 18 neutron, berapakah nomor massa ($A$) atom tersebut?",
+                options: [
+                    { text: "$17$", isCorrect: false, rationale: "Angka $17$ hanya merupakan Nomor Atom ($Z$)."},
+                    { text: "$25$", isCorrect: false, rationale: "Nomor Atom ($Z$) adalah $17$, sehingga $A$ seharusnya $17+18=35$."},
+                    { text: "$35$", isCorrect: true, rationale: "Konfigurasi elektron atom adalah $2-8-7$, sehingga $Z=17$. Nomor massa $A = Z+n = 17+18=35$." },
+                    { text: "$40$", isCorrect: false, rationale: "Nilai ini tidak sesuai dengan perhitungan dari jumlah proton dan neutron." }
+                ]
+            },
+            // 4. Definisi Isotop, Isoton, Isobar
+            {
+                question: "Apa definisi yang benar mengenai **isobar**?",
+                options: [
+                    { text: "Atom-atom yang memiliki nomor atom ($Z$) sama tetapi nomor massa ($A$) berbeda.", isCorrect: false, rationale: "Ini adalah definisi dari isotop."},
+                    { text: "Atom-atom dari unsur yang berbeda yang memiliki jumlah neutron ($n$) sama.", isCorrect: false, rationale: "Ini adalah definisi dari isoton."},
+                    { text: "Atom-atom dari unsur yang berbeda yang memiliki nomor massa ($A$) sama.", isCorrect: true, rationale: "Isobar berasal dari kata $iso$ (sama) dan $bar$ (massa/berat), yang berarti memiliki nomor massa yang sama." },
+                    { text: "Atom-atom yang memiliki jumlah elektron valensi sama.", isCorrect: false, rationale: "Ini adalah ciri-ciri atom yang berada dalam golongan yang sama." }
+                ]
+            },
+            // 5. Pasangan Isotop, Isoton, Isobar
+            {
+                question: "Dari daftar $^{16}_{8}\\text{O}$, $^{14}_{7}\\text{N}$, $^{23}_{11}\\text{Na}$, $^{24}_{12}\\text{Mg}$, dan $^{14}_{6}\\text{C}$, manakah pasangan yang termasuk **isoton**?",
+                options: [
+                    { text: "$^{16}_{8}\\text{O}$ dan $^{15}_{8}\\text{O}$ (Isotop)", isCorrect: false, rationale: "Pasangan ini memiliki Nomor Atom sama ($Z=8$)."},
+                    { text: "$^{14}_{7}\\text{N}$ dan $^{14}_{6}\\text{C}$ (Isobar)", isCorrect: false, rationale: "Pasangan ini memiliki Nomor Massa sama ($A=14$)."},
+                    { text: "$^{23}_{11}\\text{Na}$ dan $^{24}_{12}\\text{Mg}$ (Isoton)", isCorrect: true, rationale: "Keduanya memiliki jumlah neutron $12$: $23-11=12$ dan $24-12=12$." },
+                    { text: "$^{23}_{11}\\text{Na}$ dan $^{14}_{6}\\text{C}$ (Tidak ada hubungan)", isCorrect: false, rationale: "Tidak ada hubungan isotop, isoton, atau isobar antara keduanya." }
+                ]
+            },
+            // 6. Pernyataan Isoton (Benar-Salah)
+            {
+                question: "Unsur $A$ ($10$ proton, $12$ neutron) dan $B$ ($A=23, Z=11$) termasuk **isoton**. (Benar / Salah)",
+                options: [
+                    { text: "Benar", isCorrect: true, rationale: "Unsur $A$ memiliki $n=12$. Unsur $B$ memiliki $n=23-11=12$. Jumlah neutron sama, sehingga isoton." },
+                    { text: "Salah", isCorrect: false, rationale: "Keduanya memiliki jumlah neutron yang sama, yaitu $12$, sehingga diklasifikasikan sebagai isoton." }
+                ]
+            },
+            // 7. Teori Atom Bohr
+            {
+                question: "Manakah pernyataan yang paling tepat menjelaskan teori atom Niels Bohr?",
+                options: [
+                    { text: "Elektron tersebar merata dalam atom seperti roti kismis.", isCorrect: false, rationale: "Ini adalah model atom Thomson."},
+                    { text: "Elektron bergerak mengelilingi inti pada lintasan acak sambil memancarkan energi secara terus-menerus.", isCorrect: false, rationale: "Ini adalah kelemahan model Rutherford yang diperbaiki Bohr."},
+                    { text: "Elektron hanya dapat berada pada orbit stasioner tertentu tanpa memancarkan energi.", isCorrect: true, rationale: "Bohr menyatakan elektron menempati kulit atom dengan tingkat energi diskrit (stasioner)." },
+                    { text: "Atom terdiri dari inti yang sangat kecil dan padat dikelilingi oleh elektron.", isCorrect: false, rationale: "Ini adalah model atom Rutherford." }
+                ]
+            },
+            // 8. Konfigurasi dan Letak 35/80 X
+            {
+                question: "Konfigurasi elektron (Bohr) dan letak unsur $^{80}_{35}\\text{X}$ dalam tabel periodik adalah...",
+                options: [
+                    { text: "$2-8-8-17$; Golongan $VIIA$, Periode $4$", isCorrect: false, rationale: "Kulit ketiga (M) maksimum $18$ elektron."},
+                    { text: "$2-8-18-7$; Golongan $VIIA$, Periode $4$", isCorrect: true, rationale: "Konfigurasinya $2-8-18-7$ ($Z=35$). $e$ valensi $7 \\rightarrow VIIA$. $4$ kulit $\\rightarrow$ Periode $4$." },
+                    { text: "$2-8-18-7$; Golongan $VIIB$, Periode $4$", isCorrect: false, rationale: "Golongan $VIIB$ menggunakan subkulit $d$ dan $s$, bukan $p$ (Golongan $VIIA$)."},
+                    { text: "$2-8-17$; Golongan $VIIA$, Periode $3$", isCorrect: false, rationale: "Unsur ini memiliki $4$ kulit, bukan $3$." }
+                ]
+            },
+            // 9. Bilangan Kuantum Azimut (Benar-Salah)
+            {
+                question: "Bilangan kuantum azimut ($\\ell$) berfungsi untuk menyatakan sub kulit. (Benar / Salah)",
+                options: [
+                    { text: "Benar", isCorrect: true, rationale: "Bilangan kuantum azimut ($\\ell$) menentukan bentuk sub kulit, di mana $\\ell=0$ (s), $\\ell=1$ (p), $\\ell=2$ (d), dan $\\ell=3$ (f)." },
+                    { text: "Salah", isCorrect: false, rationale: "Fungsi $\\ell$ adalah memang untuk menyatakan bentuk sub kulit." }
+                ]
+            },
+            // 10. Kapasitas Elektron d dan f
+            {
+                question: "Sub kulit $d$ maksimum menampung elektron sebanyak $X$, sedangkan sub kulit $f$ menampung $Y$. Nilai $X$ dan $Y$ adalah...",
+                options: [
+                    { text: "$X=6, Y=10$", isCorrect: false, rationale: "Sub kulit $p$ menampung $6$ elektron, dan $d$ menampung $10$ elektron."},
+                    { text: "$X=10, Y=14$", isCorrect: true, rationale: "Sub kulit $d$ memiliki 5 orbital ($5\\times 2 = 10$), dan $f$ memiliki 7 orbital ($7\\times 2 = 14$)." },
+                    { text: "$X=10, Y=18$", isCorrect: false, rationale: "Maksimum elektron pada $f$ adalah $14$."},
+                    { text: "$X=14, Y=18$", isCorrect: false, rationale: "Nilai ini terbalik." }
+                ]
+            },
+            // 11. Kisaran Kuantum Magnetik f
+            {
+                question: "Harga $m$ (kuantum magnetik) yang dimiliki sub kulit $f$ memiliki kisaran harga $-3$ sampai $+3$. (Benar / Salah)",
+                options: [
+                    { text: "Benar", isCorrect: true, rationale: "Untuk sub kulit $f$, $\\ell=3$. Nilai $m$ berkisar dari $-\\ell$ hingga $+\\ell$, yaitu $-3, -2, -1, 0, +1, +2, +3$." },
+                    { text: "Salah", isCorrect: false, rationale: "Pernyataan ini benar, sesuai dengan aturan bilangan kuantum." }
+                ]
+            },
+            // 12. Spin dalam Satu Orbital
+            {
+                question: "Apakah dua elektron dalam satu orbital dapat memiliki spin yang sama? Jelaskan alasannya.",
+                options: [
+                    { text: "Ya, karena spin tidak terikat pada orbital.", isCorrect: false, rationale: "Spin adalah bilangan kuantum keempat yang harus berbeda jika ketiga bilangan kuantum lainnya sama."},
+                    { text: "Tidak, karena keduanya akan saling tolak-menolak dengan kuat.", isCorrect: false, rationale: "Alasannya adalah Asas Larangan Pauli, bukan hanya tolakan muatan."},
+                    { text: "Tidak, sesuai Asas Larangan Pauli, spin harus berlawanan ($\\frac{1}{2}$ dan $-\\frac{1}{2}$).", isCorrect: true, rationale: "Asas Larangan Pauli menyatakan bahwa tidak boleh ada dua elektron dalam atom yang memiliki keempat bilangan kuantum yang sama." },
+                    { text: "Ya, asalkan mereka memiliki energi yang sama.", isCorrect: false, rationale: "Spin harus tetap berlawanan meskipun energinya sama." }
+                ]
+            },
+            // 13. Konfigurasi Elektron 52/26 X (Benar-Salah)
+            {
+                question: "Konfigurasi elektron unsur $^{52}_{26}\\text{X}$ (Nomor Atom $26$) adalah $[\\text{Ar}] 4s^2 3d^4$. (Benar / Salah)",
+                options: [
+                    { text: "Benar", isCorrect: false, rationale: "Konfigurasi yang benar untuk $Z=26$ adalah $[\\text{Ar}] 4s^2 3d^6$ (Besi/Fe). Konfigurasi $3d^4$ terjadi pada $Z=24$ (Kromium) sebagai $[\\text{Ar}] 4s^1 3d^5$." },
+                    { text: "Salah", isCorrect: true, rationale: "Nomor atom $Z=26$ memiliki konfigurasi $[\\text{Ar}] 4s^2 3d^6$ (Besi/Fe)." }
+                ]
+            },
+            // 14. Konfigurasi Ion Fe3+ (Benar-Salah)
+            {
+                question: "Konfigurasi elektron ion $\\text{Fe}^{3+}$ (Nomor Atom $\\text{Fe}=26$) adalah $[\\text{Ar}] 4s^0 3d^5$. (Benar / Salah)",
+                options: [
+                    { text: "Benar", isCorrect: true, rationale: "Konfigurasi $\\text{Fe}$ adalah $[\\text{Ar}] 4s^2 3d^6$. Pelepasan $3e^-$ dimulai dari $4s$ (terluar) dan kemudian $3d$ ($2e^-$ dari $4s$ dan $1e^-$ dari $3d$). Hasilnya adalah $[\\text{Ar}] 3d^5$." },
+                    { text: "Salah", isCorrect: false, rationale: "Pernyataan ini benar karena pelepasan elektron dimulai dari orbital terluar $4s$." }
+                ]
+            },
+            // 15. Bilangan Kuantum Ca
+            {
+                question: "Tentukan harga keempat bilangan kuantum ($n, \\ell, m, s$) untuk elektron terakhir unsur $^{40}_{20}\\text{Ca}$.",
+                options: [
+                    { text: "$n=3, \\ell=2, m=0, s=-1/2$", isCorrect: false, rationale: "Elektron terakhir berada di kulit $4s$, bukan $3d$."},
+                    { text: "$n=4, \\ell=0, m=0, s=-1/2$", isCorrect: true, rationale: "Konfigurasi $20\\text{Ca}$ adalah $\\dots 4s^2$. Elektron ke-$20$ berada di $4s$, sehingga $n=4, \\ell=0, m=0$, dan spin terakhir adalah $s=-1/2$." },
+                    { text: "$n=4, \\ell=1, m=-1, s=+1/2$", isCorrect: false, rationale: "Elektron terakhir berada di subkulit $s$, bukan $p$ ($\\ell=1$)."},
+                    { text: "$n=4, \\ell=0, m=0, s=+1/2$", isCorrect: false, rationale: "Elektron terakhir pada $s^2$ memiliki spin berlawanan, yaitu $-1/2$." }
+                ]
+            },
+            // 16. Nomor Atom X dari Bilangan Kuantum Ion
+            {
+                question: "Bilangan kuantum elektron terakhir ion $\\text{X}^{2+}$ adalah $n=3, \\ell=2, m=+2, s=+1/2$. Berapakah nomor atom unsur $X$?",
+                options: [
+                    { text: "$25$", isCorrect: true, rationale: "Elektron terakhir $\\text{X}^{2+}$ berada di $3d^5$. Jumlah $e$ ion adalah $18+5=23$. $X$ netral ($23+2$) memiliki $Z=25$." },
+                    { text: "$23$", isCorrect: false, rationale: "Ini adalah nomor atom ion $\\text{X}^{2+}$ ($23$ elektron), bukan atom netral $X$."},
+                    { text: "$27$", isCorrect: false, rationale: "Jika $Z=27$ (Co), $\\text{Co}^{2+}$ memiliki konfigurasi $[\\text{Ar}] 3d^7$ dan elektron terakhirnya di $m=0, s=-1/2$." },
+                    { text: "$28$", isCorrect: false, rationale: "Jika $Z=28$ (Ni), $\\text{Ni}^{2+}$ memiliki konfigurasi $[\\text{Ar}] 3d^8$." }
+                ]
+            },
+            // 17. Elektron Tidak Berpasangan Z=23
+            {
+                question: "Pada atom yang bernomor $23$ ($V$), terdapat elektron yang tidak berpasangan sebanyak...",
+                options: [
+                    { text: "$2$", isCorrect: false, rationale: "Unsur $V$ memiliki $3$ elektron di orbital $3d$ yang semuanya tunggal."},
+                    { text: "$3$", isCorrect: true, rationale: "Konfigurasi $Z=23$ adalah $[\\text{Ar}] 4s^2 3d^3$. Orbital $3d$ memiliki $3$ elektron tunggal (tidak berpasangan) sesuai Aturan Hund." },
+                    { text: "$4$", isCorrect: false, rationale: "Unsur dengan $4$ elektron tak berpasangan adalah $\\text{Cr}$ ($4s^1 3d^5$)."},
+                    { text: "$5$", isCorrect: false, rationale: "Unsur dengan $5$ elektron tak berpasangan adalah $\\text{Mn}$ ($4s^2 3d^5$)."}
+                ]
+            },
+            // 18. Letak Unsur 24/52 X
+            {
+                question: "Tentukan letak unsur $^{52}_{24}\\text{X}$ ($Z=24$) dalam Sistem Periodik Unsur (SPU).",
+                options: [
+                    { text: "Periode 4, Golongan VIB", isCorrect: true, rationale: "Konfigurasi $Z=24$ ($Cr$) adalah $[\\text{Ar}] 4s^1 3d^5$. $n$ terbesar $4 \\rightarrow$ Periode $4$. $e$ valensi $1+5=6 \\rightarrow$ Golongan VIB." },
+                    { text: "Periode 4, Golongan IVA", isCorrect: false, rationale: "Golongan $\\text{IVA}$ memiliki $e$ valensi $4$ pada $s$ dan $p$."},
+                    { text: "Periode 3, Golongan VIB", isCorrect: false, rationale: "Unsur ini memiliki kulit $4$ ($4s^1$)."},
+                    { text: "Periode 4, Golongan VB", isCorrect: false, rationale: "Golongan $\\text{VB}$ memiliki $e$ valensi $5$ (Contoh $V, 4s^2 3d^3$)." }
+                ]
+            },
+            // 19. Sistem Triad Dobereiner
+            {
+                question: "Jelaskan dasar pengelompokkan unsur berdasarkan sistem Triad Dobereiner.",
+                options: [
+                    { text: "Unsur dikelompokkan berdasarkan kenaikan nomor atom.", isCorrect: false, rationale: "Ini adalah dasar pengelompokan SPU Modern (Moseley)."},
+                    { text: "Sifat unsur berulang setiap 8 unsur.", isCorrect: false, rationale: "Ini adalah dasar Hukum Oktaf Newlands."},
+                    { text: "Unsur dikelompokkan menjadi tiga-tiga (triad) di mana unsur tengah memiliki sifat dan massa rata-rata unsur pertama dan ketiga.", isCorrect: true, rationale: "Dobereiner mengelompokkan unsur menjadi tiga berdasarkan kesamaan sifat dan keteraturan massa atom relatif." },
+                    { text: "Unsur dikelompokkan berdasarkan konfigurasi elektron terluar.", isCorrect: false, rationale: "Ini adalah dasar penentuan golongan dan periode." }
+                ]
+            },
+            // 20. Dasar Pengelompokan SPU Modern
+            {
+                question: "Apa dasar pengelompokkan unsur pada SPU Modern?",
+                options: [
+                    { text: "Berdasarkan kenaikan massa atom relatif dan kesamaan sifat kimia.", isCorrect: false, rationale: "Ini adalah dasar pengelompokan Mendeleyev."},
+                    { text: "Berdasarkan kenaikan nomor atom ($Z$).", isCorrect: true, rationale: "SPU Modern didasarkan pada penemuan Moseley, yang menyusun unsur berdasarkan kenaikan nomor atom." },
+                    { text: "Berdasarkan jumlah kulit atom dan jumlah proton.", isCorrect: false, rationale: "Hanya berdasarkan Nomor Atom ($Z$)."},
+                    { text: "Berdasarkan penemuan sinar-X oleh Rontgen.", isCorrect: false, rationale: "Penemuan sinar-X tidak langsung menjadi dasar pengelompokan SPU." }
+                ]
+            },
+            // 21. Unsur Golongan Sama
+            {
+                question: "Manakah di antara unsur-unsur ${}_{3}\\text{P}, {}_{12}\\text{Q}, {}_{19}\\text{R}, {}_{33}\\text{S}, dan {}_{53}\\text{T}$ yang terletak dalam **golongan yang sama**?",
+                options: [
+                    { text: "P ($Z=3$) dan Q ($Z=12$)", isCorrect: false, rationale: "P adalah Golongan IA ($2s^1$), Q adalah Golongan IIA ($3s^2$)." },
+                    { text: "P ($Z=3$) dan R ($Z=19$)", isCorrect: true, rationale: "P ($2s^1$) dan R ($4s^1$) sama-sama memiliki $1$ elektron valensi, sehingga keduanya berada di Golongan IA." },
+                    { text: "Q ($Z=12$) dan S ($Z=33$)", isCorrect: false, rationale: "Q adalah IIA, S ($4s^2 4p^3$) adalah VA." },
+                    { text: "S ($Z=33$) dan T ($Z=53$)", isCorrect: false, rationale: "S adalah VA, T ($5s^2 5p^5$) adalah VIIA." }
+                ]
+            },
+            // 22. Kesimpulan Keelektronegatifan (Benar-Salah)
+            {
+                question: "Diketahui unsur $R$ di paling kanan periode dan $Q$ di paling atas golongan $R$. Kesimpulan keelektronegatifan: $R > S > P > Q$. (Benar / Salah)",
+                options: [
+                    { text: "Benar", isCorrect: false, rationale: "Keelektronegatifan cenderung meningkat dari kiri ke kanan (periode) dan dari bawah ke atas (golongan). Oleh karena itu, $Q$ (paling atas/kanan) seharusnya memiliki keelektronegatifan tertinggi." },
+                    { text: "Salah", isCorrect: true, rationale: "Keelektronegatifan tertinggi adalah $Q$. Urutan yang benar seharusnya adalah $Q > R > S > P$." }
+                ]
+            },
+            // 23. Unsur X (Z=20) termasuk Halogen (Benar-Salah)
+            {
+                question: "Unsur $\\text{X}$ dengan Nomor Atom $20$ termasuk dalam kelompok unsur halogen. (Benar / Salah)",
+                options: [
+                    { text: "Benar", isCorrect: false, rationale: "Unsur $Z=20$ ($\\text{Ca}$) berada di Golongan IIA (Alkali Tanah). Halogen adalah Golongan VIIA." },
+                    { text: "Salah", isCorrect: true, rationale: "Unsur $Z=20$ adalah Kalsium ($\\text{Ca}$), yang termasuk dalam kelompok Alkali Tanah (Golongan IIA)." }
+                ]
+            },
+            // 24. Unsur Satu Golongan Transisi B (Benar-Salah)
+            {
+                question: "Unsur yang berada dalam satu golongan transisi ($B$) adalah $Q$ dan $R$, dengan konfigurasi $Q=[\\text{Ne}] 3s^2 3p^6$ dan $R=[\\text{Ar}] 4s^2 3d^{10} 4p^6$. (Benar / Salah)",
+                options: [
+                    { text: "Benar", isCorrect: false, rationale: "Kedua unsur ($Q$ dan $R$) memiliki $8$ elektron valensi ($s+p$ terisi penuh), sehingga keduanya adalah Gas Mulia (Golongan VIIIA), bukan unsur transisi (Golongan B)." },
+                    { text: "Salah", isCorrect: true, rationale: "Kedua unsur adalah Gas Mulia (Golongan VIIIA). Unsur transisi yang segolongan adalah $P$ ($VIIIB$) dan $S$ ($VIIIB$)." }
+                ]
+            },
+            // 25. Notasi Unsur X dan Golongannya
+            {
+                question: "Ion $\\text{X}^{2+}$ memiliki konfigurasi $2-8-8$. Jika unsur $X$ mempunyai 20 neutron, tuliskan notasi unsurnya dan golongannya.",
+                options: [
+                    { text: "$^{40}_{20}\\text{X}$, Golongan IIA", isCorrect: true, rationale: "Elektron $\\text{X}^{2+}$ adalah $18$. Atom $X$ netral memiliki $18+2=20$ elektron ($Z=20$). $A=Z+n=20+20=40$. Konfigurasi $2-8-8-2$ ($e$ valensi $2$) $\\rightarrow$ Golongan IIA." },
+                    { text: "$^{38}_{20}\\text{X}$, Golongan IIA", isCorrect: false, rationale: "Nomor massa $A$ seharusnya $20+20=40$."},
+                    { text: "$^{40}_{20}\\text{X}$, Golongan VIIIA", isCorrect: false, rationale: "Elektron valensi $2$ berarti Golongan IIA."},
+                    { text: "$^{38}_{18}\\text{X}$, Golongan VIIIA", isCorrect: false, rationale: "Ini adalah notasi untuk Argon." }
+                ]
+            },
+            // 26. Golongan IIA (Benar-Salah)
+            {
+                question: "Kelompok unsur pada golongan IIA diberi nama alkali tanah. (Benar / Salah)",
+                options: [
+                    { text: "Benar", isCorrect: true, rationale: "Golongan IA dinamakan Alkali, Golongan IIA dinamakan Alkali Tanah." },
+                    { text: "Salah", isCorrect: false, rationale: "Pernyataan ini benar." }
+                ]
+            },
+            // 27. Notasi Unsur R (Benar-Salah)
+            {
+                question: "Ion $\\text{R}^{2-}$ memiliki konfigurasi $2-8-8$. Jika unsur $R$ memiliki $16$ neutron, maka notasi unsur $R$ adalah $^{32}_{16}\\text{R}$. (Benar / Salah)",
+                options: [
+                    { text: "Benar", isCorrect: true, rationale: "Elektron $\\text{R}^{2-}$ adalah $18$. Atom $R$ netral memiliki $18-2=16$ elektron ($Z=16$). $A=Z+n=16+16=32$. Notasinya adalah $^{32}_{16}\\text{R}$ (Sulfur/Belerang)." },
+                    { text: "Salah", isCorrect: false, rationale: "Pernyataan ini benar." }
+                ]
+            },
+            // 28. Senyawa Mg2+ dan PO43-
+            {
+                question: "Jika ion $\\text{Mg}^{2+}$ berikatan dengan ion $\\text{PO}_4^{3-}$, tuliskan rumus senyawa dan nama senyawanya.",
+                options: [
+                    { text: "Rumus $\\text{Mg}_2(\\text{PO}_4)_3$, nama Magnesium Fosfat", isCorrect: false, rationale: "Rumus senyawa harus menyeimbangkan muatan: $3 \\times (2+) + 2 \\times (3-) = 0$."},
+                    { text: "Rumus $\\text{Mg}_3(\\text{PO}_4)_2$, nama Magnesium (II) Fosfat", isCorrect: false, rationale: "Magnesium adalah Golongan IIA, tidak perlu angka Romawi (II)."},
+                    { text: "Rumus $\\text{Mg}_3(\\text{PO}_4)_2$, nama Magnesium Fosfat", isCorrect: true, rationale: "Senyawa terbentuk dari pertukaran muatan menjadi $\\text{Mg}_3(\\text{PO}_4)_2$. Nama senyawanya adalah Magnesium Fosfat." },
+                    { text: "Rumus $\\text{MgPO}_4$, nama Magnesium Fosfat", isCorrect: false, rationale: "Muatan tidak seimbang: $2+ \\neq 3-$." }
+                ]
+            },
+            // 29. Senyawa Cr3+ dan OH- (Benar-Salah)
+            {
+                question: "Ion $\\text{Cr}^{3+}$ berikatan dengan $\\text{OH}^{-}$ membentuk senyawa $\\text{Cr}(\\text{OH})_3$ yang dinamakan Kromium(III) hidroksida. (Benar / Salah)",
+                options: [
+                    { text: "Benar", isCorrect: true, rationale: "Muatan $3+$ dan $1-$ menghasilkan $\\text{Cr}(\\text{OH})_3$. $\\text{Cr}$ adalah logam transisi dengan muatan $3+$ sehingga diberi nama Kromium(III) hidroksida." },
+                    { text: "Salah", isCorrect: false, rationale: "Pernyataan ini benar." }
+                ]
+            },
+            // 30. Nama Senyawa Fe(NO3)2 (Benar-Salah)
+            {
+                question: "Nama senyawa $\\text{Fe}(\\text{NO}_3)_2$ adalah Besi(II) nitrat. (Benar / Salah)",
+                options: [
+                    { text: "Benar", isCorrect: true, rationale: "Karena $\\text{NO}_3$ bermuatan $1-$, maka $\\text{Fe}$ bermuatan $2+$. Logam transisi $\\text{Fe}^{2+}$ dinamakan Besi(II). Anion $\\text{NO}_3^-$ dinamakan nitrat." },
+                    { text: "Salah", isCorrect: false, rationale: "Pernyataan ini benar." }
+                ]
+            },
+            // 31. Nama IUPAC Senyawa Reaksi Karbit
+            {
+                question: "Pada reaksi $\\text{CaC}_2(s) + 2\\text{H}_2\\text{O}(\\ell) \\to \\text{Ca}(\\text{OH})_2 (aq) + \\text{C}_2\\text{H}_2(g)$, tuliskan Nama IUPAC senyawa yang dihasilkan.",
+                options: [
+                    { text: "Kalsium hidroksida dan Etana", isCorrect: false, rationale: "$\\text{C}_2\\text{H}_2$ adalah Etuna (asetilena), bukan Etana ($\\text{C}_2\\text{H}_6$)." },
+                    { text: "Kalsium oksida dan Etuna", isCorrect: false, rationale: "Senyawa yang dihasilkan adalah $\\text{Ca}(\\text{OH})_2$ (Kalsium hidroksida)."},
+                    { text: "Kalsium hidroksida dan Etuna", isCorrect: true, rationale: "Senyawa ion $\\text{Ca}(\\text{OH})_2$ adalah Kalsium hidroksida. Senyawa organik $\\text{C}_2\\text{H}_2$ adalah Etuna." },
+                    { text: "Kalsium sulfat dan Metana", isCorrect: false, rationale: "Senyawa yang dihasilkan adalah $\\text{Ca}(\\text{OH})_2$ dan $\\text{C}_2\\text{H}_2$." }
+                ]
+            },
+            // 32. Koefisien Reaksi Setara C8H18 (Benar-Salah)
+            {
+                question: "Supaya reaksi $\\text{aC}_8\\text{H}_{18} + \\text{bO}_2 \\to \\text{cCO}_2 + \\text{dH}_2\\text{O}$ setara, maka koefisien $a, b, c, d$ berturut-turut adalah $2, 25, 16, 18$. (Benar / Salah)",
+                options: [
+                    { text: "Benar", isCorrect: true, rationale: "Pengecekan: $\\text{C}$ ($2\\times 8 = 16$, $16\\times 1 = 16$), $\\text{H}$ ($2\\times 18 = 36$, $18\\times 2 = 36$), $\\text{O}$ ($25\\times 2 = 50$, $16\\times 2 + 18\\times 1 = 50$). Reaksi setara." },
+                    { text: "Salah", isCorrect: false, rationale: "Pernyataan ini benar." }
+                ]
+            },
+            // 33. Penyetaraan Reaksi Amonia
+            {
+                question: "Persamaan reaksi kimia yang setara untuk penguraian gas amonia ($\\text{NH}_3$) menjadi gas nitrogen dan gas hidrogen adalah...",
+                options: [
+                    { text: "$2\\text{NH}_3(g) \\to 2\\text{N}_2(g) + 3\\text{H}_2(g)$", isCorrect: false, rationale: "Koefisien $\\text{N}_2$ seharusnya $1$."},
+                    { text: "$2\\text{NH}_3(g) \\to \\text{N}_2(g) + 3\\text{H}_2(g)$", isCorrect: true, rationale: "Reaksi setara: $\\text{N}$ ($2=2$), $\\text{H}$ ($2\\times 3=6$, $3\\times 2=6$)." },
+                    { text: "$\\text{NH}_3(g) \\to \\text{N}_2(g) + \\text{H}_2(g)$", isCorrect: false, rationale: "Reaksi ini belum setara."},
+                    { text: "$2\\text{NH}_3(g) \\to \\text{N}_2(g) + 2\\text{H}_2(g)$", isCorrect: false, rationale: "Jumlah atom $\\text{H}$ belum setara." }
+                ]
+            },
+            // 34. Penyetaraan Reaksi Besi dan Klor
+            {
+                question: "Tuliskan persamaan reaksi kimia yang benar (setara) untuk reaksi Besi ($\\text{Fe}$) dengan klor ($\\text{Cl}_2$) membentuk besi(III) klorida ($\\text{FeCl}_3$).",
+                options: [
+                    { text: "$\\text{Fe}(s) + \\text{Cl}_2(g) \\to \\text{FeCl}_3(s)$", isCorrect: false, rationale: "Belum setara."},
+                    { text: "$\\text{Fe}(s) + 3\\text{Cl}_2(g) \\to 2\\text{FeCl}_3(s)$", isCorrect: false, rationale: "Atom $\\text{Fe}$ belum setara."},
+                    { text: "$2\\text{Fe}(s) + 3\\text{Cl}_2(g) \\to 2\\text{FeCl}_3(s)$", isCorrect: true, rationale: "Reaksi setara: $\\text{Fe}$ ($2=2$), $\\text{Cl}$ ($3\\times 2=6$, $2\\times 3=6$)." },
+                    { text: "$2\\text{Fe}(s) + 2\\text{Cl}_2(g) \\to 2\\text{FeCl}_3(s)$", isCorrect: false, rationale: "Atom $\\text{Cl}$ belum setara." }
+                ]
+            },
+            // 35. Persamaan Reaksi MgO dan H2SO4
+            {
+                question: "Tuliskan persamaan reaksi kimia untuk padatan magnesium oksida ($\\text{MgO}$) dengan larutan asam sulfat ($\\text{H}_2\\text{SO}_4$) menghasilkan magnesium sulfat dan air.",
+                options: [
+                    { text: "$\\text{Mg}(\\text{OH})_2(s) + \\text{H}_2\\text{SO}_4(aq) \\to \\text{MgSO}_4(aq) + 2\\text{H}_2\\text{O}(\\ell)$", isCorrect: false, rationale: "Reaktan seharusnya $\\text{MgO}$, bukan $\\text{Mg}(\\text{OH})_2$."},
+                    { text: "$\\text{MgO}(s) + \\text{H}_2\\text{SO}_4(aq) \\to \\text{MgSO}_4(aq) + \\text{H}_2\\text{O}(\\ell)$", isCorrect: true, rationale: "Reaksi asam-basa menghasilkan garam $\\text{MgSO}_4$ dan air $\\text{H}_2\\text{O}$. Reaksi ini sudah setara." },
+                    { text: "$\\text{Mg}(s) + \\text{H}_2\\text{SO}_4(aq) \\to \\text{MgSO}_4(aq) + \\text{H}_2(g)$", isCorrect: false, rationale: "Reaktan seharusnya $\\text{MgO}$ (oksida), bukan $\\text{Mg}$ (logam)."},
+                    { text: "$\\text{Mg}_2\\text{O}(s) + \\text{H}_2\\text{SO}_4(aq) \\to \\text{MgSO}_4(aq) + \\text{H}_2\\text{O}(\\ell)$", isCorrect: false, rationale: "Rumus magnesium oksida adalah $\\text{MgO}$." }
+                ]
+            }
+        ];
+
+        // --- GLOBAL STATE ---
+        let timerInterval;
+        let seconds = 0;
+        // Inisialisasi array untuk 35 soal
+        let userAnswers = new Array(quizData.length).fill(null); 
+
+        // --- KATE X INIT ---
+        function initKaTeX() {
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "$", right: "$", display: false}, // Inline mode for linear display
+                    ],
+                    throwOnError: false
+                });
+            } else {
+                console.error("KaTeX auto-render function is not loaded.");
+                // Fallback for visual confirmation if KaTeX failed to load
+                document.querySelectorAll('.question-card, .answer-option').forEach(el => {
+                    el.innerHTML = el.innerHTML.replace(/\$\$(.*?)\$\$/g, (match, p1) => `<span style="color: red; font-style: italic;">[RUMUS: ${p1.trim()}]</span>`);
+                    el.innerHTML = el.innerHTML.replace(/\$(.*?)\$/g, (match, p1) => `<span style="color: red; font-style: italic;">[RUMUS: ${p1.trim()}]</span>`);
+                });
+            }
+        }
+
+        // --- TIMER LOGIC ---
+        function startTimer() {
+            seconds = 0;
+            document.getElementById('timer-display').classList.remove('hidden');
+            timerInterval = setInterval(() => {
+                seconds++;
+                const min = Math.floor(seconds / 60);
+                const sec = seconds % 60;
+                document.getElementById('timer-value').textContent = 
+                    `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+
+        // --- SCREEN CONTROL ---
+        function showMaterialModal() {
+            const modal = document.getElementById('material-modal');
+            modal.classList.remove('hidden');
+            // Animate modal content
+            const modalContent = document.getElementById('modal-content');
+            modalContent.classList.remove('scale-95', 'opacity-0');
+            modalContent.classList.add('scale-100', 'opacity-100');
+        }
+
+        function hideMaterialModal() {
+            const modal = document.getElementById('material-modal');
+            const modalContent = document.getElementById('modal-content');
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function startQuiz() {
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            loadAllQuestions();
+            startTimer();
+        }
+
+        function loadAllQuestions() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+            
+            quizData.forEach((qData, qIndex) => {
+                const qElement = document.createElement('div');
+                qElement.className = 'question-card p-5 bg-white border border-gray-200 rounded-lg shadow-sm';
+                qElement.innerHTML = `
+                    <p class="text-lg font-semibold text-gray-800 mb-3">Soal ${qIndex + 1}:</p>
+                    <p class="text-md text-gray-700 mb-4">${qData.question}</p>
+                    <div id="options-${qIndex}" class="space-y-3">
+                        ${qData.options.map((option, oIndex) => `
+                            <div class="answer-option p-3 border-2 border-gray-300 rounded-lg" 
+                                 data-q-index="${qIndex}" 
+                                 data-o-index="${oIndex}">
+                                <span class="font-medium">${String.fromCharCode(65 + oIndex)}.</span> ${option.text}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(qElement);
+            });
+
+            // Add event listeners after rendering
+            document.querySelectorAll('.answer-option').forEach(element => {
+                element.addEventListener('click', handleAnswerClick);
+            });
+
+            // Re-render KaTeX for new content
+            initKaTeX();
+        }
+
+        function handleAnswerClick(event) {
+            const element = event.currentTarget;
+            const qIndex = parseInt(element.dataset.qIndex);
+            const oIndex = parseInt(element.dataset.oIndex);
+
+            // Remove selected state from siblings
+            document.getElementById(`options-${qIndex}`).querySelectorAll('.answer-option').forEach(sibling => {
+                sibling.classList.remove('selected-answer', 'border-indigo-500', 'bg-indigo-50');
+            });
+
+            // Set selected state for current element
+            element.classList.add('selected-answer', 'border-indigo-500', 'bg-indigo-50');
+            userAnswers[qIndex] = oIndex;
+        }
+
+        // --- SUBMIT AND RESULTS ---
+        function submitQuiz() {
+            stopTimer();
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+            calculateAndDisplayResults();
+        }
+
+        function calculateAndDisplayResults() {
+            let correctCount = 0;
+            const totalQuestions = quizData.length;
+            
+            // 1. Calculate Score
+            quizData.forEach((qData, qIndex) => {
+                const selectedIndex = userAnswers[qIndex];
+                if (selectedIndex !== null && qData.options[selectedIndex].isCorrect) {
+                    correctCount++;
+                }
+            });
+
+            const incorrectCount = totalQuestions - correctCount;
+            const scorePercentage = Math.round((correctCount / totalQuestions) * 100);
+
+            // 2. Display Summary
+            document.getElementById('result-score').textContent = `${scorePercentage}%`;
+            document.getElementById('result-correct').textContent = correctCount;
+            document.getElementById('result-incorrect').textContent = incorrectCount;
+            document.getElementById('result-time').textContent = document.getElementById('timer-value').textContent;
+
+            // 3. Display Detailed Results
+            const detailsContainer = document.getElementById('results-details-container');
+            detailsContainer.innerHTML = '';
+
+            quizData.forEach((qData, qIndex) => {
+                const selectedIndex = userAnswers[qIndex];
+                const qDetailElement = document.createElement('div');
+                qDetailElement.className = 'p-5 rounded-lg shadow-md border-2 ' + (
+                    selectedIndex !== null && qData.options[selectedIndex].isCorrect ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50'
+                );
+                
+                // Question Header
+                qDetailElement.innerHTML = `
+                    <p class="text-xl font-bold text-gray-800 mb-2">Soal ${qIndex + 1} 
+                        <span class="ml-2 px-3 py-1 text-sm rounded-full font-semibold ${selectedIndex !== null && qData.options[selectedIndex].isCorrect ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}">
+                            ${selectedIndex !== null && qData.options[selectedIndex].isCorrect ? 'BENAR' : 'SALAH'}
+                        </span>
+                    </p>
+                    <p class="text-md text-gray-700 mb-4">${qData.question}</p>
+                `;
+
+                // Options with highlighting
+                const optionsList = document.createElement('div');
+                optionsList.className = 'space-y-3 mb-4';
+                qData.options.forEach((option, oIndex) => {
+                    const isSelected = oIndex === selectedIndex;
+                    const isCorrect = option.isCorrect;
+                    
+                    let className = 'p-3 border rounded-lg disabled ';
+                    if (isCorrect) {
+                        className += 'correct-answer font-bold';
+                    } else if (isSelected && !isCorrect) {
+                        className += 'incorrect-answer selected-answer';
+                    } else {
+                        className += 'border-gray-300 bg-white';
+                    }
+
+                    optionsList.innerHTML += `
+                        <div class="${className}">
+                            <span class="font-medium">${String.fromCharCode(65 + oIndex)}.</span> ${option.text}
+                            ${isSelected ? '<span class="ml-2 text-xs font-semibold">(Jawabanmu)</span>' : ''}
+                            ${isCorrect && !isSelected ? '<span class="ml-2 text-xs font-semibold">(Jawaban Benar)</span>' : ''}
+                        </div>
+                    `;
+                });
+                qDetailElement.appendChild(optionsList);
+
+                // Rationale/Pembahasan
+                const correctOption = qData.options.find(opt => opt.isCorrect);
+                if (correctOption) {
+                    const rationaleBox = document.createElement('div');
+                    rationaleBox.className = 'rationale-box p-4 rounded-lg text-gray-700 text-sm';
+                    rationaleBox.innerHTML = `<p class="font-semibold text-indigo-800 mb-1">Pembahasan:</p><p>${correctOption.rationale}</p>`;
+                    qDetailElement.appendChild(rationaleBox);
+                }
+
+                detailsContainer.appendChild(qDetailElement);
+            });
+
+            // Re-render KaTeX for results screen
+            initKaTeX();
+        }
+    </script>
+</body>
+</html>
